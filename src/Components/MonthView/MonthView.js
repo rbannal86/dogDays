@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import DateBox from "../DateBox/DateBox";
 import "./MonthView.css";
 
@@ -40,7 +40,7 @@ export default function MonthView(props) {
         {monthArray.map((day, index) => {
           return (
             <li key={index} className={"calendar_listitem"}>
-              <DateBox date={day} />
+              <DateBox date={day} handleClick={props.handleClick} />
             </li>
           );
         })}

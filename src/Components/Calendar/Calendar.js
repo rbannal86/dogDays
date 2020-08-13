@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import MonthView from "../MonthView/MonthView";
+import DetailView from "../DetailView/DetailView";
 
 export default function Calendar() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [view, setView] = useState("week");
+  const [openView, setOpenView] = useState(false);
+
+  const todaysDate = new Date();
 
   const months = [
     "January",
@@ -24,9 +28,17 @@ export default function Calendar() {
     setView(e.target.value);
   };
 
+  const handleClick = (day) => {
+    console.log(typeof day);
+    if (typeof day !== "object" || day === null) return null;
+    setSelectedDate(day);
+    setOpenView(true);
+  };
+
   return (
     <>
-      <div>{selectedDate.toLocaleDateString()}</div>
+      <div>{todaysDate.toLocaleDateString()}</div>
+      {openView ? <DetailView day={selectedDate} /> : <></>}
       <button value="day" onClick={(e) => handleView(e)}>
         Day
       </button>
@@ -40,6 +52,7 @@ export default function Calendar() {
         <MonthView
           selectedDate={selectedDate}
           month={months[selectedDate.getMonth()]}
+          handleClick={handleClick}
         />
       ) : (
         <></>
