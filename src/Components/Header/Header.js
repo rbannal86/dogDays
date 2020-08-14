@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 export default function Header(props) {
   return (
     <div className="header_div">
+      {props.userName !== "" ? <h3>Welcome, {props.userName}</h3> : <></>}
       {!props.userName ? (
         <>
           <button onClick={() => props.setDisplay("register")}>Register</button>

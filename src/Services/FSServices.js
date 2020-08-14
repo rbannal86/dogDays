@@ -35,6 +35,23 @@ const FSServices = {
     return getDoc;
   },
 
+  async fetchDogData(dogId) {
+    let userRef = db.collection("dogs").doc(dogId);
+    let getDoc = userRef
+      .get()
+      .then((doc) => {
+        if (!doc.exists) {
+          console.log("Dog Does Not Exist");
+        } else {
+          return doc.data();
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    return getDoc;
+  },
+
   async registerNewUser(email, password, displayName) {
     console.log("registering new user");
     try {
@@ -47,6 +64,39 @@ const FSServices = {
       };
       await db.collection("users").doc(userObj.id).set(userObj);
       return await this.fetchUserData(user.user.uid);
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  },
+
+  //wire this up to set an array of dogId for the user
+  async registerDog(userId, dogObj) {
+    console.log("registering new dog");
+    console.log(dogObj);
+    let dogId;
+
+    try {
+      await db
+        .collection("dogs")
+        .add(dogObj)
+        .then((ref) => (dogId = ref.id));
+      let userData = await db
+        .collection("users")
+        .doc(userId)
+        .get()
+        .then((doc) => {
+          if (!doc.exists) return console.log("User does not exist!");
+          else return doc.data();
+        });
+      let dogs;
+      if (userData.dogs) {
+        dogs = userData.dogs;
+      } else dogs = [];
+
+      dogs.push(dogId);
+
+      await db.collection("users").doc(userId).update({ dogs: dogs });
     } catch (error) {
       console.log(error);
       return error;
