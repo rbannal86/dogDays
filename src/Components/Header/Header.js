@@ -3,6 +3,7 @@ import React from "react";
 export default function Header(props) {
   return (
     <div className="header_div">
+      <h1>dogDays</h1>
       {props.userName !== "" ? <h3>Welcome, {props.userName}</h3> : <></>}
       {!props.userName ? (
         <>
@@ -11,7 +12,7 @@ export default function Header(props) {
         </>
       ) : null}
       {props.userName ? (
-        <button onClick={() => props.setUserId("")}>Log Out</button>
+        <button onClick={() => props.setUserId(null)}>Log Out</button>
       ) : null}
     </div>
   );

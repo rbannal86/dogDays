@@ -16,8 +16,15 @@ export default function DogRegister(props) {
     e.preventDefault();
     handleDogInput();
     dogInput.forEach((dog) => {
-      FSServices.registerDog(props.userId, dog);
+      FSServices.registerDog(props.userId, dog).then(() =>
+        FSServices.fetchUserData(props.userId).then((res) => {
+          console.log(res);
+          props.setUserData(res);
+        })
+      );
     });
+
+    props.setShowDogRegister(false);
   };
 
   const clearDogInfo = () => {
@@ -69,6 +76,13 @@ export default function DogRegister(props) {
         }}
       >
         Add Another Dog
+      </button>
+      <button
+        onClick={() => {
+          props.setShowDogRegister(false);
+        }}
+      >
+        Cancel
       </button>
     </>
   );

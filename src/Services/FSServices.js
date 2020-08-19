@@ -18,6 +18,10 @@ const FSServices = {
       });
   },
 
+  async getDog(dogId, userId) {
+    return db.collection("dogs").where("userId", "==", userId).get();
+  },
+
   async fetchUserData(userId) {
     let userRef = db.collection("users").doc(userId);
     let getDoc = userRef
@@ -35,7 +39,17 @@ const FSServices = {
     return getDoc;
   },
 
-  async fetchDogData(dogId) {
+  async createDogArray(dogs) {
+    let dogArray = [];
+    dogs.map(async (dog) => {
+      await this.fetchDogData(dog).then((res) => {
+        dogArray.push(res);
+      });
+    });
+    return dogArray;
+  },
+
+  fetchDogData(dogId) {
     let userRef = db.collection("dogs").doc(dogId);
     let getDoc = userRef
       .get()
@@ -74,6 +88,7 @@ const FSServices = {
   async registerDog(userId, dogObj) {
     console.log("registering new dog");
     console.log(dogObj);
+    dogObj.userId = userId;
     let dogId;
 
     try {

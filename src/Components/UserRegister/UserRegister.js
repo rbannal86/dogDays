@@ -58,6 +58,7 @@ export default function UserRegister(props) {
           name="user_email"
           value={email}
           onChange={(e) => setInputState(e)}
+          required
         />
         <label htmlFor="user_name">Username: </label>
         <input
@@ -66,6 +67,7 @@ export default function UserRegister(props) {
           placeholder="Harry Houndman"
           value={userName}
           onChange={(e) => setInputState(e)}
+          required
         />
         <label htmlFor="user_password">Password: </label>
         <input
@@ -74,6 +76,7 @@ export default function UserRegister(props) {
           placeholder="password..."
           name="user_password"
           onChange={(e) => setInputState(e)}
+          required
         />
         <input
           id="user_password_comfirm"
@@ -81,9 +84,11 @@ export default function UserRegister(props) {
           placeholder="password..."
           name="user_password_confirm"
           onChange={(e) => setInputState(e)}
+          required
         />
         <button>Register</button>
       </form>
+      <button onClick={() => props.setDisplay(null)}>Cancel</button>
     </div>
   );
 }
