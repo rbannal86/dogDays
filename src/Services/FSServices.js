@@ -2,6 +2,22 @@ import app from "./Base";
 const db = app.firestore();
 
 const FSServices = {
+  async fetchDogRecords(dateId, dogId) {
+    return db
+      .collection("dogs")
+      .doc(dogId)
+      .collection("records")
+      .doc(dateId)
+      .get()
+      .then((doc) => {
+        if (!doc.exists) {
+          console.log("Records Do Not Exist");
+        } else {
+          return doc.data();
+        }
+      });
+  },
+
   async signInUser(email, password) {
     return await app
       .auth()
@@ -112,6 +128,7 @@ const FSServices = {
       dogs.push(dogId);
 
       await db.collection("users").doc(userId).update({ dogs: dogs });
+      await db.collection("dogs").doc(dogId).update({ id: dogId });
     } catch (error) {
       console.log(error);
       return error;

@@ -11,6 +11,7 @@ export default function DateBox(props) {
       ) : (
         <span />
       )}
+      {props.dayRecords ? <div>{props.dayRecords.aggregate}</div> : <></>}
     </div>
   );
 }
