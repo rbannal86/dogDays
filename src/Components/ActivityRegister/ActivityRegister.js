@@ -1,16 +1,35 @@
 import React, { useState } from "react";
 import DogForm from "../Forms/DogForm";
+import FSServices from "../../Services/FSServices";
 
-export default function ActivityRegister() {
+export default function ActivityRegister(props) {
   const [activityType, setActivityType] = useState("");
-  const [activityRating, setActivityRating] = useState(null);
+  const [activityRating, setActivityRating] = useState(0);
   const [activityNotes, setActivityNotes] = useState("");
   const [error, setError] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!!activityType || !activityRating)
+    if (!activityType || !activityRating)
       setError("You must enter an activity and a rating before submitting!");
+    else {
+      let monthString = (props.selectedDate.getMonth() + 1).toString();
+      let yearString = props.selectedDate.getFullYear().toString();
+      if (monthString.length === 1) monthString = "0" + monthString;
+      let documentId = monthString + yearString;
+      let dayId = props.selectedDate.getDate().toString();
+      let activityObject = {
+        score: parseInt(activityRating),
+        type: activityType,
+        note: activityNotes,
+      };
+      await FSServices.submitActivity(
+        documentId,
+        dayId,
+        activityObject,
+        props.dogId
+      );
+    }
   };
 
   return (

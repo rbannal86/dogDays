@@ -13,7 +13,7 @@ const FSServices = {
         if (!doc.exists) {
           console.log("Records Do Not Exist");
         } else {
-          return doc.data();
+          return doc;
         }
       });
   },
@@ -34,7 +34,7 @@ const FSServices = {
       });
   },
 
-  async getDog(dogId, userId) {
+  async getDog(userId) {
     return db.collection("dogs").where("userId", "==", userId).get();
   },
 
@@ -97,6 +97,42 @@ const FSServices = {
     } catch (error) {
       console.log(error);
       return error;
+    }
+  },
+
+  async submitActivity(docId, dayId, activityObj, dogId) {
+    const recordRef = db
+      .collection("dogs")
+      .doc(dogId)
+      .collection("records")
+      .doc(docId);
+    const doc = await recordRef.get();
+    if (!doc.exists) console.log("Record doesn't exist!");
+    else {
+      console.log(doc.data());
+      let monthData = doc.data();
+      let dayData;
+      if (monthData[dayId]) dayData = monthData[dayId];
+      else dayData = { activities: [], aggregate: 0 };
+
+      dayData.activities.push(activityObj);
+      let totalScore = 0;
+      dayData.activities.map((day) => {
+        return (totalScore = day.score + totalScore);
+      });
+
+      let updatedAggregate = totalScore / dayData.activities.length;
+
+      dayData.aggregate = updatedAggregate;
+
+      monthData[dayId] = dayData;
+
+      await db
+        .collection("dogs")
+        .doc(dogId)
+        .collection("records")
+        .doc(docId)
+        .set(monthData);
     }
   },
 

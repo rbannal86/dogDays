@@ -9,21 +9,19 @@ export default function UserSidebar(props) {
     const createDogArray = async () => {
       let newDogArray = [];
       try {
-        return await FSServices.getDog(props.userDogs, props.userId).then(
-          (snapshot) => {
-            snapshot.forEach((doc) => {
-              newDogArray.push(doc.data());
-            });
-            newDogArray.sort((a, b) => {
-              let nameA = a.dogName.toUpperCase();
-              let nameB = b.dogName.toUpperCase();
-              if (nameA < nameB) return -1;
-              if (nameA > nameB) return 1;
-              return 0;
-            });
-            return newDogArray;
-          }
-        );
+        return await FSServices.getDog(props.userId).then((snapshot) => {
+          snapshot.forEach((doc) => {
+            newDogArray.push(doc.data());
+          });
+          newDogArray.sort((a, b) => {
+            let nameA = a.dogName.toUpperCase();
+            let nameB = b.dogName.toUpperCase();
+            if (nameA < nameB) return -1;
+            if (nameA > nameB) return 1;
+            return 0;
+          });
+          return newDogArray;
+        });
       } catch (error) {
         console.log(error);
       }
@@ -38,14 +36,11 @@ export default function UserSidebar(props) {
 
   useEffect(() => {
     if (dogArray.length > 0) {
-      console.log("setting focus dog");
-      console.log(dogArray[0]);
       props.setFocusDog(dogArray[0]);
     }
   }, [dogArray, props]);
 
   const renderDogs = () => {
-    console.log("rendering dogs");
     return dogArray.map((dog, index) => {
       return (
         <li

@@ -12,11 +12,6 @@ export default function Main(props) {
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   useEffect(() => {
-    if (userData.dogs && !focusDog) {
-      console.log(userData.dogs[0]);
-    }
-
-    console.log(focusDog);
     let monthString = (selectedDate.getMonth() + 1).toString();
     let yearString = selectedDate.getFullYear().toString();
     if (monthString.length === 1) monthString = "0" + monthString;

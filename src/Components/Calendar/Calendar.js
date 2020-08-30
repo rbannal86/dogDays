@@ -39,7 +39,6 @@ export default function Calendar(props) {
   };
 
   const handleClick = (day) => {
-    console.log(typeof day);
     if (typeof day !== "object" || day === null) return null;
     setSelectedDate(day);
     props.setSelectedDate(day);
@@ -68,7 +67,9 @@ export default function Calendar(props) {
       ) : (
         <></>
       )}
-      {showActivityRegister ? <ActivityRegister /> : null}
+      {showActivityRegister ? (
+        <ActivityRegister selectedDate={selectedDate} dogId={props.dogId.id} />
+      ) : null}
       {view === "month" ? (
         <MonthView
           selectedDate={selectedDate}
