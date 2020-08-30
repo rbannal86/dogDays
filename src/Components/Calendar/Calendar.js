@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import MonthView from "../MonthView/MonthView";
 import WeekView from "../WeekView/WeekView";
 import DayView from "../DayView/DayView";
+import ActivityRegister from "../ActivityRegister/ActivityRegister";
 
 export default function Calendar(props) {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -67,7 +68,7 @@ export default function Calendar(props) {
       ) : (
         <></>
       )}
-      {showActivityRegister ? <div>Activity Form</div> : null}
+      {showActivityRegister ? <ActivityRegister /> : null}
       {view === "month" ? (
         <MonthView
           selectedDate={selectedDate}

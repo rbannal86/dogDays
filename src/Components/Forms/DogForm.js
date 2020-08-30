@@ -10,6 +10,8 @@ export default function DogForm(props) {
         placeholder={props.placeholder}
         value={props.value}
         onChange={(e) => props.handleChange(e.target.value)}
+        min={props.min || null}
+        max={props.max || null}
       />
     </div>
   );

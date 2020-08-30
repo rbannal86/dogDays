@@ -33,7 +33,16 @@ export default function UserSidebar(props) {
       setDogArray(res);
       setLoaded(true);
     });
-  }, [props]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (dogArray.length > 0) {
+      console.log("setting focus dog");
+      console.log(dogArray[0]);
+      props.setFocusDog(dogArray[0]);
+    }
+  }, [dogArray, props]);
 
   const renderDogs = () => {
     console.log("rendering dogs");
