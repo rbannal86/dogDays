@@ -3,6 +3,7 @@ import MonthView from "../MonthView/MonthView";
 import WeekView from "../WeekView/WeekView";
 import DayView from "../DayView/DayView";
 import ActivityRegister from "../ActivityRegister/ActivityRegister";
+import CalendarNav from "../CalendarNav/CalendarNav";
 
 export default function Calendar(props) {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -13,7 +14,7 @@ export default function Calendar(props) {
 
   let dayRecords;
 
-  if (props.monthRecords) {
+  if (props.monthRecords && selectedDate) {
     dayRecords = props.monthRecords[selectedDate.getDate()];
   }
 
@@ -48,15 +49,22 @@ export default function Calendar(props) {
   return (
     <>
       <div>{selectedDate.toLocaleDateString()}</div>
-      <button value="day" onClick={(e) => handleView(e)}>
+      {/* <button value="day" onClick={(e) => handleView(e)}>
         Day
-      </button>
+      </button> */}
       <button value="week" onClick={(e) => handleView(e)}>
         Week
       </button>
       <button value="month" onClick={(e) => handleView(e)}>
         Month
       </button>
+
+      <CalendarNav
+        selectedDate={selectedDate}
+        setSelectedDate={setSelectedDate}
+        view={view}
+      />
+
       {view === "day" || openView === true ? (
         <DayView
           dayRecords={dayRecords}
@@ -68,13 +76,18 @@ export default function Calendar(props) {
         <></>
       )}
       {showActivityRegister ? (
-        <ActivityRegister selectedDate={selectedDate} dogId={props.dogId.id} />
+        <ActivityRegister
+          selectedDate={selectedDate}
+          dogId={props.dogId.id}
+          setShowActivityRegister={setShowActivityRegister}
+        />
       ) : null}
       {view === "month" ? (
         <MonthView
           selectedDate={selectedDate}
           month={months[selectedDate.getMonth()]}
           handleClick={handleClick}
+          monthRecords={props.monthRecords}
         />
       ) : (
         <></>

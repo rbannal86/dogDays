@@ -14,14 +14,12 @@ export default function UserRegister(props) {
 
   const submitRegistration = async (e) => {
     e.preventDefault();
-    console.log("submitting user registration");
     if (!passRegex.test(password))
       return setError(
         "Password must be eight characters or longer and contain at least 1 lowercase, 1 uppercase, 1 numeric, and one special character."
       );
     if (password !== confirmPassword) return setError("Password don't match");
     let userId = await FSServices.registerNewUser(email, password, userName);
-    console.log(userId);
     props.setUserId(userId);
     props.setDisplay(null);
   };

@@ -28,7 +28,9 @@ export default function ActivityRegister(props) {
         dayId,
         activityObject,
         props.dogId
-      );
+      ).then(() => {
+        props.setShowActivityRegister(false);
+      });
     }
   };
 

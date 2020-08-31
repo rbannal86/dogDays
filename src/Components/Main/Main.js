@@ -3,6 +3,7 @@ import Calendar from "../Calendar/Calendar";
 import UserSidebar from "../UserSidebar/UserSidebar";
 import DogRegister from "../DogRegister/DogRegister";
 import FSServices from "../../Services/FSServices";
+// import firebase from "firebase/firebase-app";
 
 export default function Main(props) {
   const [focusDog, setFocusDog] = useState(null);
@@ -12,6 +13,7 @@ export default function Main(props) {
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   useEffect(() => {
+    //Also fetch next month and the previous month, add on further months based on changing view
     let monthString = (selectedDate.getMonth() + 1).toString();
     let yearString = selectedDate.getFullYear().toString();
     if (monthString.length === 1) monthString = "0" + monthString;
@@ -32,6 +34,18 @@ export default function Main(props) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [focusDog, selectedDate]);
+
+  //look into listeners more
+  // if (focusDog) {
+  //   var monthDataUpdate = firebase
+  //     .database()
+  //     .ref("dogs/" + focusDog.dogId + "/records");
+
+  //   monthDataUpdate.on("value", (snapshot) => {
+  //     console.log("change detected");
+  //     setMonthRecords(snapshot.val());
+  //   });
+  // }
 
   return (
     <>

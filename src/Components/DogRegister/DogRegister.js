@@ -18,7 +18,6 @@ export default function DogRegister(props) {
     dogInput.forEach((dog) => {
       FSServices.registerDog(props.userId, dog).then(() =>
         FSServices.fetchUserData(props.userId).then((res) => {
-          console.log(res);
           props.setUserData(res);
         })
       );

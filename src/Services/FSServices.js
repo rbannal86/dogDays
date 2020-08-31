@@ -13,7 +13,7 @@ const FSServices = {
         if (!doc.exists) {
           console.log("Records Do Not Exist");
         } else {
-          return doc;
+          return doc.data();
         }
       });
   },
@@ -109,7 +109,6 @@ const FSServices = {
     const doc = await recordRef.get();
     if (!doc.exists) console.log("Record doesn't exist!");
     else {
-      console.log(doc.data());
       let monthData = doc.data();
       let dayData;
       if (monthData[dayId]) dayData = monthData[dayId];
@@ -138,8 +137,6 @@ const FSServices = {
 
   //wire this up to set an array of dogId for the user
   async registerDog(userId, dogObj) {
-    console.log("registering new dog");
-    console.log(dogObj);
     dogObj.userId = userId;
     let dogId;
 

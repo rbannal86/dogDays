@@ -38,9 +38,16 @@ export default function MonthView(props) {
     return (
       <ul className={"monthview_calendar"}>
         {monthArray.map((day, index) => {
+          let dayIndex;
+          if (typeof day === "object" && day !== null) dayIndex = day.getDate();
+
           return (
             <li key={index} className={"calendar_listitem"}>
-              <DateBox date={day} handleClick={props.handleClick} />
+              <DateBox
+                date={day}
+                handleClick={props.handleClick}
+                dayRecords={props.monthRecords[dayIndex]}
+              />
             </li>
           );
         })}
