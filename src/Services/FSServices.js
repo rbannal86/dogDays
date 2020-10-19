@@ -18,6 +18,17 @@ const FSServices = {
       });
   },
 
+  async getRecords(dogId) {
+    return db
+      .collection("dogs")
+      .doc(dogId)
+      .collection("records")
+      .get()
+      .then((snapshot) => {
+        snapshot.forEach((doc) => console.log(doc.data()));
+      });
+  },
+
   async signInUser(email, password) {
     return await app
       .auth()
@@ -100,6 +111,12 @@ const FSServices = {
     }
   },
 
+  // async creatMonthRecord(docId, dogId) {
+  //   const monthRef = db.collection('dogs').doc(dogId).collection('records')
+
+  //   monthRef.set
+  // },
+
   async submitActivity(docId, dayId, activityObj, dogId) {
     const recordRef = db
       .collection("dogs")
@@ -107,32 +124,35 @@ const FSServices = {
       .collection("records")
       .doc(docId);
     const doc = await recordRef.get();
-    if (!doc.exists) console.log("Record doesn't exist!");
-    else {
-      let monthData = doc.data();
-      let dayData;
-      if (monthData[dayId]) dayData = monthData[dayId];
-      else dayData = { activities: [], aggregate: 0 };
+    // if (!doc.exists) console.log("Record doesn't exist!");
+    // else {
+    let monthData = doc.data();
+    let dayData;
+    console.log(monthData);
+    if (monthData && monthData[dayId]) dayData = monthData[dayId];
+    else dayData = { activities: [], aggregate: 0 };
 
-      dayData.activities.push(activityObj);
-      let totalScore = 0;
-      dayData.activities.map((day) => {
-        return (totalScore = day.score + totalScore);
-      });
+    if (monthData === undefined) monthData = {};
 
-      let updatedAggregate = totalScore / dayData.activities.length;
+    dayData.activities.push(activityObj);
+    let totalScore = 0;
+    dayData.activities.map((day) => {
+      return (totalScore = day.score + totalScore);
+    });
 
-      dayData.aggregate = updatedAggregate;
+    let updatedAggregate = totalScore / dayData.activities.length;
 
-      monthData[dayId] = dayData;
+    dayData.aggregate = updatedAggregate;
 
-      await db
-        .collection("dogs")
-        .doc(dogId)
-        .collection("records")
-        .doc(docId)
-        .set(monthData);
-    }
+    monthData[dayId] = dayData;
+
+    await db
+      .collection("dogs")
+      .doc(dogId)
+      .collection("records")
+      .doc(docId)
+      .set(monthData);
+    // }
   },
 
   //wire this up to set an array of dogId for the user

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Main from "./Components/Main/Main";
+import Main from "./Components/Main/Main2";
 import Header from "./Components/Header/Header";
 import UserRegister from "./Components/UserRegister/UserRegister";
 import UserLogin from "./Components/UserLogin/UserLogin";
@@ -18,7 +18,8 @@ function App() {
 
   return (
     <div className="App">
-      <Header
+      <Main />
+      {/* <Header
         userName={userHandle}
         setDisplay={setDisplay}
         setUserId={setUserId}
@@ -29,7 +30,7 @@ function App() {
       {display === "login" ? (
         <UserLogin setUserId={setUserId} setDisplay={setDisplay} />
       ) : null}
-      {userId ? <Main userData={userId} /> : null}
+      {userId ? <Main userData={userId} /> : null} */}
     </div>
   );
 }

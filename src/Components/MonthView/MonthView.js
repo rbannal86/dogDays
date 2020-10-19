@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import DateBox from "../DateBox/DateBox";
 import "./MonthView.css";
 
 export default function MonthView(props) {
+  const [view, setView] = useState(props.view);
+
+  useEffect(() => {
+    if (props.view && !view) setView(props.view);
+  }, [props.view, view]);
+
   const year = props.selectedDate.getFullYear();
   const month = props.selectedDate.getMonth();
 
   let days;
-  let monthArray = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  let monthArray = [];
+  if (view !== "year")
+    monthArray = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   if (props.month === "February") {
     if (year % 100 === 0 ? year % 400 === 0 : year % 4 === 0) days = 29;
@@ -42,12 +50,8 @@ export default function MonthView(props) {
           if (typeof day === "object" && day !== null) dayIndex = day.getDate();
 
           return (
-            <li key={index} className={"calendar_listitem"}>
-              <DateBox
-                date={day}
-                handleClick={props.handleClick}
-                dayRecords={props.monthRecords[dayIndex]}
-              />
+            <li key={index} className={"calendar_listitem" + view}>
+              <DateBox date={day} handleClick={props.handleClick} view={view} />
             </li>
           );
         })}
@@ -56,9 +60,9 @@ export default function MonthView(props) {
   };
 
   return (
-    <>
-      <h3>Month of {props.month}</h3>
+    <div className={"monthview" + props.view}>
+      <h3 className={"monthview_header"}>{props.month}</h3>
       <div>{renderDateBoxes()}</div>
-    </>
+    </div>
   );
 }

@@ -10,7 +10,19 @@ export default function Main(props) {
   const [showDogRegister, setShowDogRegister] = useState(false);
   const [userData, setUserData] = useState(props.userData);
   const [monthRecords, setMonthRecords] = useState(null);
+  const [nextMonthRecords, setNextMonthRecords] = useState(null);
+  const [lastMonthRecords, setLastMonthRecords] = useState(null);
   const [selectedDate, setSelectedDate] = useState(new Date());
+
+  console.log(monthRecords);
+  console.log(selectedDate);
+
+  useEffect(() => {
+    if (focusDog) {
+      console.log(focusDog.id);
+      FSServices.getRecords(focusDog.id);
+    }
+  }, [focusDog]);
 
   useEffect(() => {
     //Also fetch next month and the previous month, add on further months based on changing view
@@ -29,10 +41,10 @@ export default function Main(props) {
 
     if (focusDog) {
       fetchMonthRecords().then((res) => {
-        setMonthRecords(res);
+        if (res === undefined) setMonthRecords({});
+        else setMonthRecords(res);
       });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [focusDog, selectedDate]);
 
   //look into listeners more

@@ -1,8 +1,37 @@
-.datebox {
-  width: 100px;
-  height: 100px;
-  border: 2px black solid;
-  flex: 1;
+.dateboxyear {
+  width: 10px;
+  height: 10px;
+  /* border: 2px black solid; */
+  /* flex: 1; */
+  background-color: lightgray;
   padding-left: 0;
   padding-right: 0;
+}
+
+.dateboxweek {
+  width: 100px;
+  height: 100px;
+  /* border: 2px black solid; */
+  /* flex: 1; */
+  background-color: lightgray;
+  padding-left: 0;
+  padding-right: 0;
+}
+.dateboxmonth {
+  width: 100px;
+  height: 100px;
+  /* border: 2px black solid; */
+  /* flex: 1; */
+  background-color: lightgray;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.empty_box {
+  background-color: white;
+}
+
+.yearli {
+  width: 10px;
+  height: 10px;
 }
