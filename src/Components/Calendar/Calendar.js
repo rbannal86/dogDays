@@ -70,9 +70,13 @@ export default function Calendar(props) {
         view={view}
       />
       <div className={"calendar_div"}>
-        {view === "year" ? <YearView selectedDate={selectedDate} /> : null}
+        {view === "year" ? (
+          <YearView selectedDate={selectedDate} records={props.records} />
+        ) : null}
         {view === "week" ? <WeekView selectedDate={selectedDate} /> : null}
-        {view === "month" ? <MonthView selectedDate={selectedDate} /> : null}
+        {view === "month" ? (
+          <MonthView selectedDate={selectedDate} view={view} />
+        ) : null}
       </div>
     </div>
   );

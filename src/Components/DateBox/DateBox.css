@@ -18,8 +18,8 @@
   padding-right: 0;
 }
 .dateboxmonth {
-  width: 100px;
-  height: 100px;
+  width: 50px;
+  height: 50px;
   /* border: 2px black solid; */
   /* flex: 1; */
   background-color: lightgray;
@@ -34,4 +34,16 @@
 .yearli {
   width: 10px;
   height: 10px;
+}
+
+.low {
+  background-color: red;
+}
+
+.medium {
+  background-color: yellow;
+}
+
+.high {
+  background-color: green;
 }

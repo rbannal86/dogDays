@@ -22,8 +22,14 @@ export default function YearView(props) {
 
   const renderMonths = () => {
     return monthNames.map((month, index) => {
+      let monthKey = index + 1;
+      if (monthKey < 10) monthKey = "0" + monthKey;
+      monthKey = monthKey.toString() + year;
+      let monthRecords;
+      if (props.records) monthRecords = props.records[monthKey];
       return (
         <MonthView
+          monthRecords={monthRecords}
           view={"year"}
           key={index}
           selectedDate={new Date(year, index, 1)}
@@ -38,5 +44,10 @@ export default function YearView(props) {
       setYear(props.selectedDate.getFullYear());
   }, [props.selectedDate, year]);
 
-  return <div className={"yearview_div"}>{renderMonths()}</div>;
+  return (
+    <div>
+      <h2>{props.selectedDate.getFullYear()}</h2>
+      <div className={"yearview_div"}>{renderMonths()}</div>
+    </div>
+  );
 }

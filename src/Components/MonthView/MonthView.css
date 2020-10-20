@@ -17,6 +17,14 @@
   margin: 0;
 }
 
+.calendar_listitemmonth {
+  width: 50px;
+}
+
+.monthviewmonth {
+  width: 80%;
+}
+
 .monthviewyear {
   width: 30%;
 }

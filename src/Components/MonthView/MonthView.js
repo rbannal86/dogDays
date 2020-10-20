@@ -9,6 +9,8 @@ export default function MonthView(props) {
     if (props.view && !view) setView(props.view);
   }, [props.view, view]);
 
+  console.log(props.monthRecords);
+
   const year = props.selectedDate.getFullYear();
   const month = props.selectedDate.getMonth();
 
@@ -46,12 +48,21 @@ export default function MonthView(props) {
     return (
       <ul className={"monthview_calendar"}>
         {monthArray.map((day, index) => {
+          let dayAggregate;
+          if (props.monthRecords && day)
+            if (props.monthRecords[day.getDate()])
+              dayAggregate = props.monthRecords[day.getDate()].aggregate;
           let dayIndex;
           if (typeof day === "object" && day !== null) dayIndex = day.getDate();
 
           return (
             <li key={index} className={"calendar_listitem" + view}>
-              <DateBox date={day} handleClick={props.handleClick} view={view} />
+              <DateBox
+                date={day}
+                handleClick={props.handleClick}
+                view={view}
+                aggregate={dayAggregate}
+              />
             </li>
           );
         })}
