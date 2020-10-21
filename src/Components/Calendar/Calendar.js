@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import Year from "../Year/Year";
 import Month from "../Month/Month";
 import Week from "../Week/Week";
+import CalendarNav from "../CalendarNav/CalendarNav";
+
+import STORE from "../../Services/STORE";
 
 export default function Calendar(props) {
   const [year, setYear] = useState(null);
@@ -9,6 +12,7 @@ export default function Calendar(props) {
   const [day, setDay] = useState(null);
   const [date, setDate] = useState(null);
   const [dayLoaded, setDayLoaded] = useState(false);
+  const [record, setRecord] = useState(STORE);
 
   useEffect(() => {
     if (props.selectedDate) {
@@ -20,17 +24,65 @@ export default function Calendar(props) {
     }
   }, [props.selectedDate]);
 
+  const handleYearClick = (month) => {
+    props.setSelectedDate(new Date(year, month, 1));
+    props.setView("month");
+  };
+
+  const handleMonthClick = (day) => {
+    props.setSelectedDate(new Date(year, month, day));
+    props.setView("week");
+  };
+
+  const handleNavClick = (direction) => {
+    if (direction === "back") {
+      if (props.view === "year")
+        props.setSelectedDate(new Date(year - 1, month, date));
+      if (props.view === "month")
+        props.setSelectedDate(new Date(year, month - 1, date));
+      if (props.view === "week")
+        props.setSelectedDate(new Date(year, month, date - 7));
+    } else {
+      if (props.view === "year")
+        props.setSelectedDate(new Date(year + 1, month, date));
+      if (props.view === "month")
+        props.setSelectedDate(new Date(year, month + 1, date));
+      if (props.view === "week")
+        props.setSelectedDate(new Date(year, month, date + 7));
+    }
+  };
+
   return (
     <div id="calendar_main">
       {dayLoaded ? (
         <>
-          {props.view === "year" ? <Year year={year} /> : null}
-          {props.view === "month" ? <Month year={year} month={month} /> : null}
+          {props.view === "year" ? (
+            <Year
+              year={year}
+              handleYearClick={handleYearClick}
+              record={record}
+            />
+          ) : null}
+          {props.view === "month" ? (
+            <Month
+              year={year}
+              month={month}
+              handleMonthClick={handleMonthClick}
+              record={record}
+            />
+          ) : null}
           {props.view === "week" ? (
-            <Week date={date} day={day} month={month} year={year} />
+            <Week
+              date={date}
+              day={day}
+              month={month}
+              year={year}
+              record={record}
+            />
           ) : null}
         </>
       ) : null}
+      <CalendarNav handleNavClick={handleNavClick} />
     </div>
   );
 }

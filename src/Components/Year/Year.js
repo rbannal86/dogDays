@@ -1,6 +1,8 @@
 import React from "react";
 import Month from "../Month/Month";
 
+import "./Year.css";
+
 export default function Year(props) {
   let monthNames = [
     "January",
@@ -19,11 +21,20 @@ export default function Year(props) {
 
   const renderMonths = () => {
     return (
-      <ul>
+      <ul className={"year_list"}>
         {monthNames.map((month, index) => {
           return (
-            <li key={index + month}>
-              <Month year={props.year} month={index} monthName={month} />
+            <li
+              className={"year_list_item"}
+              key={index + month}
+              onClick={() => props.handleYearClick(index)}
+            >
+              <Month
+                year={props.year}
+                month={index}
+                monthName={month}
+                record={props.record}
+              />
             </li>
           );
         })}
@@ -31,5 +42,10 @@ export default function Year(props) {
     );
   };
 
-  return <div id={"year_main"}>{renderMonths()}</div>;
+  return (
+    <>
+      <h3>{props.year}</h3>
+      <div id={"year_main"}>{renderMonths()}</div>
+    </>
+  );
 }

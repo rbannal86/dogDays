@@ -5,10 +5,23 @@ import "./Week.css";
 
 export default function Week(props) {
   let weekArray = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  let recordArray = [null, null, null, null, null, null, null];
   let weekStart = props.date - props.day;
 
   for (let i = weekStart; i < weekStart + 7; i++) {
-    weekArray.push(new Date(props.year, props.month, i).getDate());
+    let newDay = new Date(props.year, props.month, i);
+    let recordKey = newDay.getMonth();
+    recordKey = recordKey + 1;
+    if (recordKey < 10) recordKey = "0" + recordKey;
+    recordKey = recordKey + newDay.getFullYear().toString();
+    if (
+      props.record[recordKey] &&
+      props.record[recordKey][newDay.getDate()] &&
+      props.record[recordKey][newDay.getDate()].aggregate
+    )
+      recordArray.push(props.record[recordKey][newDay.getDate()].aggregate);
+    else recordArray.push(null);
+    weekArray.push(newDay.getDate());
   }
 
   const renderDays = () => {
@@ -17,7 +30,7 @@ export default function Week(props) {
         {weekArray.map((day, index) => {
           return (
             <li key={index} className={"week_list_item"}>
-              <DayBox date={day} />
+              <DayBox date={day} aggregate={recordArray[index]} />
             </li>
           );
         })}

@@ -1,5 +1,37 @@
-let store = {
-  "092020": {},
+let STORE = {
+  "012019": {},
+  "092020": {
+    1: { aggregate: 5, activities: { walk: 5, other: 5 } },
+    2: { aggregate: 2.5, activities: { walk: 0, other: 5 } },
+    3: { aggregate: 5, activities: { walk: 5, other: 5, play: 5 } },
+    4: { aggregate: 10, activities: { walk: 10, training: 10 } },
+    5: { aggregate: 5, activities: { walk: 5, other: 5 } },
+    6: { aggregate: 5, activities: { walk: 0, other: 10 } },
+    7: { aggregate: 5, activities: { walk: 5, other: 5 } },
+    8: { aggregate: 10, activities: { walk: 10, other: 10 } },
+    9: { aggregate: 2.5, activities: { walk: 0, other: 5 } },
+    10: { aggregate: 5, activities: { walk: 0, other: 10 } },
+    11: { aggregate: 7.5, activities: { walk: 5, other: 10 } },
+    12: { aggregate: 10, activities: { walk: 10, other: 10 } },
+    13: { aggregate: 5, activities: { walk: 0, other: 10 } },
+    14: { aggregate: 10, activities: { walk: 10, other: 10 } },
+    15: { aggregate: 7.5, activities: { walk: 5, other: 10 } },
+    16: { aggregate: 2.5, activities: { walk: 0, other: 5 } },
+    17: { aggregate: 5, activities: { walk: 5, other: 5 } },
+    18: { aggregate: 7.5, activities: { walk: 5, other: 10 } },
+    19: { aggregate: 7.5, activities: { walk: 5, other: 10 } },
+    20: { aggregate: 2.5, activities: { walk: 0, other: 5 } },
+    21: { aggregate: 5, activities: { walk: 5, other: 5, play: 5 } },
+    22: { aggregate: 10, activities: { walk: 10, training: 10 } },
+    23: { aggregate: 5, activities: { walk: 5, other: 5 } },
+    24: { aggregate: 5, activities: { walk: 0, other: 10 } },
+    25: { aggregate: 5, activities: { walk: 5, other: 5 } },
+    26: { aggregate: 10, activities: { walk: 10, other: 10 } },
+    27: { aggregate: 2.5, activities: { walk: 0, other: 5 } },
+    28: { aggregate: 5, activities: { walk: 0, other: 10 } },
+    29: { aggregate: 7.5, activities: { walk: 5, other: 10 } },
+    30: { aggregate: 10, activities: { walk: 10, other: 10 } },
+  },
   102020: {
     1: { aggregate: 7.5, activities: { walk: 5, other: 10 } },
     2: { aggregate: 2.5, activities: { walk: 0, other: 5 } },
@@ -22,4 +54,4 @@ let store = {
   },
 };
 
-export default store;
+export default STORE;
