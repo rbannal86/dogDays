@@ -61,6 +61,7 @@ export default function Calendar(props) {
               year={year}
               handleYearClick={handleYearClick}
               record={record}
+              handleAddActivity={null}
             />
           ) : null}
           {props.view === "month" ? (
@@ -69,6 +70,7 @@ export default function Calendar(props) {
               month={month}
               handleMonthClick={handleMonthClick}
               record={record}
+              handleAddActivity={props.handleAddActivity}
             />
           ) : null}
           {props.view === "week" ? (
@@ -78,6 +80,7 @@ export default function Calendar(props) {
               month={month}
               year={year}
               record={record}
+              handleAddActivity={props.handleAddActivity}
             />
           ) : null}
         </>

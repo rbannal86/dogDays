@@ -80,12 +80,15 @@ export default function Month(props) {
         <ul className={"month_list"}>
           {monthArray.map((day, index) => {
             let aggregate = null;
-            if (
-              props.record[recordKey] &&
-              props.record[recordKey][day] &&
-              props.record[recordKey][day].aggregate
-            )
-              aggregate = props.record[recordKey][day].aggregate;
+            if (props.record[recordKey] && props.record[recordKey][day]) {
+              if (props.record[recordKey][day].aggregate)
+                aggregate = props.record[recordKey][day].aggregate;
+
+              if (props.record[recordKey][day].aggregate.toString() === "0") {
+                console.log("aggregate is 0", day);
+                aggregate = "0";
+              }
+            }
 
             return (
               <li
