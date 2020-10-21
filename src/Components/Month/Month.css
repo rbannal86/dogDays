@@ -1,0 +1,16 @@
+.month_list {
+  display: grid;
+  list-style: none;
+  grid-template-columns: repeat(7, 0fr);
+  padding: 0;
+  justify-content: center;
+}
+
+.month_list_header {
+  font-size: 0.5rem;
+}
+
+.month_list_item {
+  width: 25px;
+  height: 25px;
+}
