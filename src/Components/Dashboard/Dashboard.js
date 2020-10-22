@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Calendar from "../Calendar/Calendar";
 import ViewButtons from "../ViewButtons/ViewButtons";
 import AddActivity from "../AddActivity/AddActivity";
+import Sidebar from "../Sidebar/Sidebar";
 
 import FSServices from "../../Services/FSServices";
 
@@ -40,9 +41,15 @@ export default function Dashboard() {
   const handleAddActivitySubmit = (activity, value) => {
     setOpenAddActivity(false);
     let updatedStore = record;
-    if (!updatedStore[recordKey]) updatedStore[recordKey] = {};
-    if (!updatedStore[recordKey][day])
-      updatedStore[recordKey][day] = { aggregate: 0, activities: [] };
+    if (!updatedStore[recordKey])
+      updatedStore[recordKey] = {
+        [day]: { aggregate: 0, activities: [{ [activity]: value }] },
+      };
+    else if (!updatedStore[recordKey][day])
+      updatedStore[recordKey][day] = {
+        aggregate: 0,
+        activities: [{ [activity]: value }],
+      };
     else
       updatedStore[recordKey][day].activities.push({
         [activity]: value,
@@ -55,6 +62,7 @@ export default function Dashboard() {
     });
     let newAggregate = activityTotal / activityNumber;
     updatedStore[recordKey][day].aggregate = newAggregate;
+    console.log(updatedStore);
     setRecord(updatedStore);
     FSServices.updateDogRecord(dogId, updatedStore);
   };
@@ -67,6 +75,7 @@ export default function Dashboard() {
       >
         {currentDate ? currentDate : null}
       </h3>
+      <Sidebar />
       {openAddActivity ? (
         <AddActivity handleAddActivitySubmit={handleAddActivitySubmit} />
       ) : null}
