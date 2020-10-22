@@ -7,9 +7,9 @@ export default function AddActivity(props) {
 
   useEffect(() => {
     const submitActivity = () => {
-      props.handleAddActivitySubmit(activity, value);
+      props.handleAddActivitySubmit(activity, parseInt(value));
     };
-    if (activity) submitActivity(activity, value);
+    if (activity) submitActivity();
   }, [activity, props, value]);
 
   const handleSetValue = (value) => {

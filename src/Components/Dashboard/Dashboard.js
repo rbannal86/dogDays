@@ -13,6 +13,18 @@ export default function Dashboard() {
   const [openAddActivity, setOpenAddActivity] = useState(false);
   const [recordKey, setRecordKey] = useState(null);
   const [day, setDay] = useState(null);
+  const [dogId, setDogId] = useState(null);
+  const [record, setRecord] = useState(null);
+
+  useEffect(() => {
+    setDogId("9wqBrOjny3hZzOu9voV0");
+  }, []);
+
+  useEffect(() => {
+    if (dogId) {
+      FSServices.fetDogRecords(dogId).then((res) => setRecord(res));
+    }
+  }, [dogId]);
 
   useEffect(() => {
     let date = new Date();
@@ -28,13 +40,14 @@ export default function Dashboard() {
 
   const handleAddActivitySubmit = (activity, value) => {
     setOpenAddActivity(false);
-    let updatedStore = STORE;
+    let updatedStore = record;
     if (!updatedStore[recordKey]) updatedStore[recordKey] = {};
     if (!updatedStore[recordKey][day])
       updatedStore[recordKey][day] = { aggregate: 0, activities: [] };
-    updatedStore[recordKey][day].activities.push({
-      [activity]: parseInt(value),
-    });
+    else
+      updatedStore[recordKey][day].activities.push({
+        [activity]: value,
+      });
     let activityTotal = 0;
     let activityNumber = 0;
     updatedStore[recordKey][day].activities.forEach((activity) => {
@@ -43,6 +56,8 @@ export default function Dashboard() {
     });
     let newAggregate = activityTotal / activityNumber;
     updatedStore[recordKey][day].aggregate = newAggregate;
+    setRecord(updatedStore);
+    FSServices.updateDogRecord(dogId, updatedStore);
   };
 
   return (
@@ -63,6 +78,7 @@ export default function Dashboard() {
         setView={setView}
         setSelectedDate={setSelectedDate}
         handleAddActivity={handleAddActivity}
+        record={record}
       />
     </div>
   );

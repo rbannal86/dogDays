@@ -6,6 +6,33 @@ const FSServices = {
   updateStore(newStore) {
     console.log(newStore);
   },
+
+  async fetDogRecords(dogId) {
+    return await db
+      .collection("dogs")
+      .doc(dogId)
+      .get()
+      .then((doc) => {
+        if (!doc.exists) console.log("Record Does Not Exist");
+        else {
+          return doc.data().record;
+        }
+      });
+  },
+
+  async updateDogRecord(dogId, record) {
+    let dogObj = await db
+      .collection("dogs")
+      .doc(dogId)
+      .get()
+      .then((doc) => {
+        if (!doc.exists) console.log("Record Does Not Exist");
+        else return doc.data();
+      });
+    dogObj.record = [];
+    dogObj.record = record;
+    db.collection("dogs").doc(dogId).set(dogObj);
+  },
   //   async fetchDogRecords(dateId, dogId) {
   //     return db
   //       .collection("dogs")

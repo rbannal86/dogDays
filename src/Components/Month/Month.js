@@ -85,7 +85,6 @@ export default function Month(props) {
                 aggregate = props.record[recordKey][day].aggregate;
 
               if (props.record[recordKey][day].aggregate.toString() === "0") {
-                console.log("aggregate is 0", day);
                 aggregate = "0";
               }
             }
