@@ -1,5 +1,4 @@
 import app from "./Base";
-import STORE from "./STORE";
 const db = app.firestore();
 
 const FSServices = {

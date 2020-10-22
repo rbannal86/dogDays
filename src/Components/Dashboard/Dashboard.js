@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Calendar from "../Calendar/Calendar";
 import ViewButtons from "../ViewButtons/ViewButtons";
 import AddActivity from "../AddActivity/AddActivity";
-import STORE from "../../Services/STORE";
 
 import FSServices from "../../Services/FSServices";
 
