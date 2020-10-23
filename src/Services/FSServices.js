@@ -6,16 +6,26 @@ const FSServices = {
     console.log(newStore);
   },
 
-  async fetDogRecords(dogId) {
+  async fetchDogRecords(dogId) {
     return await db
       .collection("dogs")
       .doc(dogId)
       .get()
       .then((doc) => {
         if (!doc.exists) console.log("Record Does Not Exist");
-        else {
-          return doc.data().record;
-        }
+        else return doc.data();
+      });
+  },
+
+  async fetchUserRecords(userId) {
+    console.log("fetching user records");
+    return await db
+      .collection("users")
+      .doc(userId)
+      .get()
+      .then((doc) => {
+        if (!doc.exists) console.log("Record Does Not Exist");
+        else return doc.data();
       });
   },
 

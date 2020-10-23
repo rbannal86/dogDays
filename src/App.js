@@ -1,15 +1,28 @@
 import React, { useState, useEffect } from "react";
-// import Main from "./Components/Main/Main2";
-// import Header from "./Components/Header/Header";
-// import UserRegister from "./Components/UserRegister/UserRegister";
-// import UserLogin from "./Components/UserLogin/UserLogin";
 import Dashboard from "./Components/Dashboard/Dashboard";
+import FSServices from "./Services/FSServices";
 import "./App.css";
 
 function App() {
+  const [userData, setUserData] = useState(null);
+
+  //replace useEffect with setData from login
+  useEffect(() => {
+    FSServices.fetchUserRecords("1DS5kpDKADXHoN8hHhucsFE6ikK2").then((res) =>
+      setUserData(res)
+    );
+  }, []);
+
   return (
     <div className="App">
-      <Dashboard />
+      {userData ? (
+        <Dashboard userData={userData} />
+      ) : (
+        <div>
+          <button>Log In</button>
+          <button>Register</button>
+        </div>
+      )}
     </div>
   );
 }

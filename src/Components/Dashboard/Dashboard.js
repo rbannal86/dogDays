@@ -7,7 +7,7 @@ import DetailList from "../DetailList/DetailList";
 
 import FSServices from "../../Services/FSServices";
 
-export default function Dashboard() {
+export default function Dashboard(props) {
   const [currentDate, setCurrentDate] = useState();
   const [selectedDate, setSelectedDate] = useState();
   const [view, setView] = useState("week");
@@ -20,6 +20,7 @@ export default function Dashboard() {
   const [toggleDetailList, setToggleDetailList] = useState(false);
   const [details, setDetails] = useState(null);
   const [detailsUpdated, setDetailsUpdated] = useState(false);
+  const [dogName, setDogName] = useState(null);
 
   useEffect(() => {
     if (detailsUpdated) setDetailsUpdated(false);
@@ -36,7 +37,10 @@ export default function Dashboard() {
 
   useEffect(() => {
     if (dogId) {
-      FSServices.fetDogRecords(dogId).then((res) => setRecord(res));
+      FSServices.fetchDogRecords(dogId).then((res) => {
+        setRecord(res.record);
+        setDogName(res.dogName);
+      });
     }
   }, [dogId]);
 
@@ -119,6 +123,8 @@ export default function Dashboard() {
       >
         {currentDate ? currentDate : null}
       </h3>
+      <h4>{props.userData.displayName ? props.userData.displayName : null}</h4>
+      <h5>{dogName ? dogName : null}</h5>
       <Sidebar
         setToggleDetails={setToggleDetails}
         toggleDetails={toggleDetails}

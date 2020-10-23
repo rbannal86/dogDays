@@ -3,9 +3,6 @@ import Year from "../Year/Year";
 import Month from "../Month/Month";
 import Week from "../Week/Week";
 import CalendarNav from "../CalendarNav/CalendarNav";
-import FSServices from "../../Services/FSServices";
-
-import STORE from "../../Services/STORE";
 
 export default function Calendar(props) {
   const [year, setYear] = useState(null);
