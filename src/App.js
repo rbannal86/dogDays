@@ -5,18 +5,41 @@ import "./App.css";
 
 function App() {
   const [userData, setUserData] = useState(null);
+  const [dogList, setDogList] = useState(null);
 
   //replace useEffect with setData from login
   useEffect(() => {
-    FSServices.fetchUserRecords("1DS5kpDKADXHoN8hHhucsFE6ikK2").then((res) =>
-      setUserData(res)
-    );
+    FSServices.fetchUserRecords("1DS5kpDKADXHoN8hHhucsFE6ikK2").then((res) => {
+      setUserData(res);
+    });
   }, []);
+
+  useEffect(() => {
+    const fetchAllDogRecords = async () => {
+      return await FSServices.fetchAllDogRecords(userData.id);
+    };
+
+    const updateDogList = async (data) => {
+      setDogList(data);
+    };
+    if (userData && !dogList) {
+      let newDogList = [];
+      fetchAllDogRecords()
+        .then((res) => {
+          res.forEach((doc) => {
+            newDogList.push(doc.data());
+          });
+        })
+        .then(() => updateDogList(newDogList));
+    }
+  }, [dogList, userData]);
+
+  console.log(dogList);
 
   return (
     <div className="App">
       {userData ? (
-        <Dashboard userData={userData} />
+        <Dashboard userData={userData} dogList={dogList} />
       ) : (
         <div>
           <button>Log In</button>

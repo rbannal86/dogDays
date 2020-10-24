@@ -1,25 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import FSServices from "../../Services/FSServices";
 
 export default function DogSelection(props) {
-  const fetchDogNames = async () => {
+  const renderDogList = () => {
     return (
       <ul>
-        {
-          await props.dogList.map((dogId, index) => {
-            return (
-              <li key={index}>
-                {FSServices.fetchDogRecords(dogId).then((res) => {
-                  console.log(res);
-                  return res.dogName;
-                })}
-              </li>
-            );
-          })
-        }
+        {props.dogList.map((dog, index) => {
+          return <li key={index}>{dog.dogName}</li>;
+        })}
       </ul>
     );
   };
-
-  return <div className={"dog_selection_main"}>{fetchDogNames()}</div>;
+  if (props.dogList)
+    return <div className={"dog_selection_main"}>{renderDogList()}</div>;
+  else return <h3>Loading Dogs</h3>;
 }

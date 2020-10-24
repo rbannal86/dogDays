@@ -2,10 +2,6 @@ import app from "./Base";
 const db = app.firestore();
 
 const FSServices = {
-  updateStore(newStore) {
-    console.log(newStore);
-  },
-
   async fetchDogRecords(dogId) {
     return await db
       .collection("dogs")
@@ -15,6 +11,10 @@ const FSServices = {
         if (!doc.exists) console.log("Record Does Not Exist");
         else return doc.data();
       });
+  },
+
+  async fetchAllDogRecords(userId) {
+    return await db.collection("dogs").where("userId", "==", userId).get();
   },
 
   async fetchUserRecords(userId) {

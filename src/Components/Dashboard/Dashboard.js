@@ -6,6 +6,7 @@ import Sidebar from "../Sidebar/Sidebar";
 import DetailList from "../DetailList/DetailList";
 
 import FSServices from "../../Services/FSServices";
+import DogSelection from "../DogSelection/DogSelection";
 
 export default function Dashboard(props) {
   const [currentDate, setCurrentDate] = useState();
@@ -27,8 +28,8 @@ export default function Dashboard(props) {
   }, [detailsUpdated]);
 
   useEffect(() => {
-    setDogId("9wqBrOjny3hZzOu9voV0");
-  }, []);
+    if (props.userData.dogs.length === 1) setDogId(props.userData.dogs[0]);
+  }, [props.userData.dogs]);
 
   useEffect(() => {
     if (toggleDetailList && !toggleDetails) setToggleDetailList(false);
@@ -115,38 +116,42 @@ export default function Dashboard(props) {
     FSServices.updateDogRecord(dogId, updatedStore);
   };
 
-  return (
-    <div id={"dashboard_main"}>
-      <h3
-        className={"dashboard_date"}
-        onClick={() => setSelectedDate(new Date())}
-      >
-        {currentDate ? currentDate : null}
-      </h3>
-      <h4>{props.userData.displayName ? props.userData.displayName : null}</h4>
-      <h5>{dogName ? dogName : null}</h5>
-      <Sidebar
-        setToggleDetails={setToggleDetails}
-        toggleDetails={toggleDetails}
-      />
-      {toggleDetailList ? (
-        <DetailList
-          details={details}
-          handleActivityDelete={handleActivityDelete}
+  if (dogId)
+    return (
+      <div id={"dashboard_main"}>
+        <h3
+          className={"dashboard_date"}
+          onClick={() => setSelectedDate(new Date())}
+        >
+          {currentDate ? currentDate : null}
+        </h3>
+        <h4>
+          {props.userData.displayName ? props.userData.displayName : null}
+        </h4>
+        <h5>{dogName ? dogName : null}</h5>
+        <Sidebar
+          setToggleDetails={setToggleDetails}
+          toggleDetails={toggleDetails}
         />
-      ) : null}
-      {openAddActivity ? (
-        <AddActivity handleAddActivitySubmit={handleAddActivitySubmit} />
-      ) : null}
-      <ViewButtons view={view} setView={setView} />
-      <Calendar
-        view={view}
-        selectedDate={selectedDate}
-        setView={setView}
-        setSelectedDate={setSelectedDate}
-        handleAddActivity={handleAddActivity}
-        record={record}
-      />
-    </div>
-  );
+        {toggleDetailList ? (
+          <DetailList
+            details={details}
+            handleActivityDelete={handleActivityDelete}
+          />
+        ) : null}
+        {openAddActivity ? (
+          <AddActivity handleAddActivitySubmit={handleAddActivitySubmit} />
+        ) : null}
+        <ViewButtons view={view} setView={setView} />
+        <Calendar
+          view={view}
+          selectedDate={selectedDate}
+          setView={setView}
+          setSelectedDate={setSelectedDate}
+          handleAddActivity={handleAddActivity}
+          record={record}
+        />
+      </div>
+    );
+  else return <DogSelection dogList={props.dogList} />;
 }
