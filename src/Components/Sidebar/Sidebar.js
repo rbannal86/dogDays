@@ -6,7 +6,15 @@ export default function Sidebar(props) {
       <button onClick={() => props.setToggleDetails(!props.toggleDetails)}>
         Details
       </button>
-      <button>Dog List</button>
+      <button
+        onClick={() => {
+          props.setDogId(null);
+          props.setRecord(null);
+          props.setDogName(null);
+        }}
+      >
+        Dog List
+      </button>
     </div>
   );
 }

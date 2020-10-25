@@ -1,12 +1,21 @@
-import React, { useEffect, useState } from "react";
-import FSServices from "../../Services/FSServices";
+import React from "react";
 
 export default function DogSelection(props) {
   const renderDogList = () => {
     return (
       <ul>
         {props.dogList.map((dog, index) => {
-          return <li key={index}>{dog.dogName}</li>;
+          return (
+            <li
+              key={index}
+              onClick={() => {
+                props.setDogId(dog.id);
+                props.setRecord(dog.record);
+              }}
+            >
+              {dog.dogName}
+            </li>
+          );
         })}
       </ul>
     );

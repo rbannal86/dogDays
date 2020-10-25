@@ -132,6 +132,9 @@ export default function Dashboard(props) {
         <Sidebar
           setToggleDetails={setToggleDetails}
           toggleDetails={toggleDetails}
+          setRecord={setRecord}
+          setDogId={setDogId}
+          setDogName={setDogName}
         />
         {toggleDetailList ? (
           <DetailList
@@ -153,5 +156,12 @@ export default function Dashboard(props) {
         />
       </div>
     );
-  else return <DogSelection dogList={props.dogList} />;
+  else
+    return (
+      <DogSelection
+        dogList={props.dogList}
+        setDogId={setDogId}
+        setRecord={setRecord}
+      />
+    );
 }
