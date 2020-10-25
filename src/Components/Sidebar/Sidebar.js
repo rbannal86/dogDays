@@ -15,6 +15,11 @@ export default function Sidebar(props) {
       >
         Dog List
       </button>
+      <button
+        onClick={() => props.setToggleDogDetails(!props.toggleDogDetails)}
+      >
+        Dog Details
+      </button>
     </div>
   );
 }

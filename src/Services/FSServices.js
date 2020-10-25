@@ -42,6 +42,22 @@ const FSServices = {
     dogObj.record = record;
     db.collection("dogs").doc(dogId).set(dogObj);
   },
+
+  async updateDogDetails(dogId, name, breed, date) {
+    let dogObj = await db
+      .collection("dogs")
+      .doc(dogId)
+      .get()
+      .then((doc) => {
+        if (!doc.exists) console.log("Record Does Not Exist");
+        else return doc.data();
+      });
+    dogObj.dogName = name;
+    dogObj.dogBreed = breed;
+    dogObj.dogBirthday = date;
+    console.log(dogObj);
+    db.collection("dogs").doc(dogId).set(dogObj);
+  },
   //   async fetchDogRecords(dateId, dogId) {
   //     return db
   //       .collection("dogs")
