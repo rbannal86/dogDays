@@ -11,6 +11,9 @@ export default function DogSelection(props) {
               onClick={() => {
                 props.setDogId(dog.id);
                 props.setRecord(dog.record);
+                props.setDogName(dog.dogName);
+                props.setDogBirthday(dog.dogBirthday);
+                props.setDogBreed(dog.dogBreed);
               }}
             >
               {dog.dogName}

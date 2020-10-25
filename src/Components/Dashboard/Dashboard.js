@@ -15,13 +15,18 @@ export default function Dashboard(props) {
   const [openAddActivity, setOpenAddActivity] = useState(false);
   const [recordKey, setRecordKey] = useState(null);
   const [day, setDay] = useState(null);
-  const [dogId, setDogId] = useState(null);
-  const [record, setRecord] = useState(null);
+
   const [toggleDetails, setToggleDetails] = useState(false);
   const [toggleDetailList, setToggleDetailList] = useState(false);
   const [details, setDetails] = useState(null);
   const [detailsUpdated, setDetailsUpdated] = useState(false);
+
+  //Dog Information State
+  const [dogId, setDogId] = useState(null);
   const [dogName, setDogName] = useState(null);
+  const [record, setRecord] = useState(null);
+  const [dogBreed, setDogBreed] = useState(null);
+  const [dogBirthday, setDogBirthday] = useState(null);
 
   useEffect(() => {
     if (detailsUpdated) setDetailsUpdated(false);
@@ -35,15 +40,6 @@ export default function Dashboard(props) {
     if (toggleDetailList && !toggleDetails) setToggleDetailList(false);
     if (toggleDetails && openAddActivity) setOpenAddActivity(false);
   }, [openAddActivity, toggleDetailList, toggleDetails]);
-
-  useEffect(() => {
-    if (dogId) {
-      FSServices.fetchDogRecords(dogId).then((res) => {
-        setRecord(res.record);
-        setDogName(res.dogName);
-      });
-    }
-  }, [dogId]);
 
   useEffect(() => {
     let date = new Date();
@@ -153,6 +149,7 @@ export default function Dashboard(props) {
           setSelectedDate={setSelectedDate}
           handleAddActivity={handleAddActivity}
           record={record}
+          birthday={dogBirthday}
         />
       </div>
     );
@@ -162,6 +159,9 @@ export default function Dashboard(props) {
         dogList={props.dogList}
         setDogId={setDogId}
         setRecord={setRecord}
+        setDogName={setDogName}
+        setDogBirthday={setDogBirthday}
+        setDogBreed={setDogBreed}
       />
     );
 }

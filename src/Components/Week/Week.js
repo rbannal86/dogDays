@@ -31,10 +31,16 @@ export default function Week(props) {
     return (
       <ul className={"week_list"}>
         {weekArray.map((day, index) => {
+          let birthdayToggle = "";
+          if (
+            parseInt(props.month) + 1 === parseInt(props.birthMonth) &&
+            day === parseInt(props.birthDay)
+          )
+            birthdayToggle = "birthday";
           return (
             <li
               key={index}
-              className={"week_list_item"}
+              className={"week_list_item " + birthdayToggle}
               onClick={() => props.handleAddActivity(day, recordKeyObject[day])}
             >
               <DayBox date={day} aggregate={recordArray[index]} />

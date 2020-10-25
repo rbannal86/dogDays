@@ -11,6 +11,13 @@ export default function Calendar(props) {
   const [date, setDate] = useState(null);
   const [dayLoaded, setDayLoaded] = useState(false);
   const [record, setRecord] = useState(props.record);
+  const [birthMonth, setBirthMonth] = useState(null);
+  const [birthDay, setBirthDay] = useState(null);
+
+  useEffect(() => {
+    setBirthMonth(props.birthday.slice(5, 7));
+    setBirthDay(props.birthday.slice(8));
+  }, [props.birthday]);
 
   useEffect(() => {
     setRecord(props.record);
@@ -64,6 +71,8 @@ export default function Calendar(props) {
                 handleYearClick={handleYearClick}
                 record={record}
                 handleAddActivity={null}
+                birthMonth={birthMonth}
+                birthDay={birthDay}
               />
             ) : null}
             {props.view === "month" ? (
@@ -73,6 +82,8 @@ export default function Calendar(props) {
                 handleMonthClick={handleMonthClick}
                 record={record}
                 handleAddActivity={props.handleAddActivity}
+                birthMonth={birthMonth}
+                birthDay={birthDay}
               />
             ) : null}
             {props.view === "week" ? (
@@ -83,6 +94,8 @@ export default function Calendar(props) {
                 year={year}
                 record={record}
                 handleAddActivity={props.handleAddActivity}
+                birthMonth={birthMonth}
+                birthDay={birthDay}
               />
             ) : null}
           </>

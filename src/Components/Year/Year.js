@@ -34,6 +34,8 @@ export default function Year(props) {
                 month={index}
                 monthName={month}
                 record={props.record}
+                birthMonth={props.birthMonth}
+                birthDay={props.birthDay}
               />
             </li>
           );
