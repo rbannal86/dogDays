@@ -5,6 +5,7 @@ import AddActivity from "../AddActivity/AddActivity";
 import Sidebar from "../Sidebar/Sidebar";
 import DetailList from "../DetailList/DetailList";
 import DogDetails from "../DogDetails/DogDetails";
+import AddDog from "../AddDog/AddDog";
 
 import FSServices from "../../Services/FSServices";
 import DogSelection from "../DogSelection/DogSelection";
@@ -22,6 +23,7 @@ export default function Dashboard(props) {
   const [details, setDetails] = useState(null);
   const [detailsUpdated, setDetailsUpdated] = useState(false);
   const [toggleDogDetails, setToggleDogDetails] = useState(false);
+  const [toggleAddDog, setToggleAddDog] = useState(false);
 
   //Dog Information State
   const [dogId, setDogId] = useState(null);
@@ -126,6 +128,15 @@ export default function Dashboard(props) {
         <h4>
           {props.userData.displayName ? props.userData.displayName : null}
         </h4>
+        {toggleAddDog ? (
+          <AddDog
+            setToggleAddDog={setToggleAddDog}
+            dogs={props.userData.dogs}
+            setUserData={props.setUserData}
+            userId={props.userData.id}
+            setDogList={props.setDogList}
+          />
+        ) : null}
         <h5>{dogName ? dogName : null}</h5>
         {toggleDogDetails ? (
           <DogDetails
@@ -146,6 +157,8 @@ export default function Dashboard(props) {
           setDogName={setDogName}
           setToggleDogDetails={setToggleDogDetails}
           toggleDogDetails={toggleDogDetails}
+          setToggleAddDog={setToggleAddDog}
+          toggleAddDog={toggleAddDog}
         />
         {toggleDetailList ? (
           <DetailList

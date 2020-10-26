@@ -34,12 +34,15 @@ function App() {
     }
   }, [dogList, userData]);
 
-  console.log(dogList);
-
   return (
     <div className="App">
       {userData ? (
-        <Dashboard userData={userData} dogList={dogList} />
+        <Dashboard
+          userData={userData}
+          dogList={dogList}
+          setUserData={setUserData}
+          setDogList={setDogList}
+        />
       ) : (
         <div>
           <button>Log In</button>

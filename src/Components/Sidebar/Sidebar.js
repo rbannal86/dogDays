@@ -20,6 +20,9 @@ export default function Sidebar(props) {
       >
         Dog Details
       </button>
+      <button onClick={() => props.setToggleAddDog(!props.toggleAddDog)}>
+        Add Dog
+      </button>
     </div>
   );
 }

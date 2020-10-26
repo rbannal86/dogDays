@@ -58,6 +58,31 @@ const FSServices = {
     console.log(dogObj);
     db.collection("dogs").doc(dogId).set(dogObj);
   },
+
+  async addDog(dogName, dogBreed, dogBirthday, userId) {
+    let dogObj = {
+      dogName,
+      dogBreed,
+      dogBirthday,
+      record: [],
+      userId,
+    };
+    const res = await db.collection("dogs").add(dogObj);
+    dogObj.id = res.id;
+    await db.collection("dogs").doc(dogObj.id).set(dogObj);
+    let userObj = await db
+      .collection("users")
+      .doc(userId)
+      .get()
+      .then((res) => {
+        let updated = res.data();
+        updated.dogs.push(dogObj.id);
+        return updated;
+      });
+
+    await db.collection("users").doc(userId).set(userObj);
+    return userObj;
+  },
   //   async fetchDogRecords(dateId, dogId) {
   //     return db
   //       .collection("dogs")
