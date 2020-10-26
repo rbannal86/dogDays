@@ -32,6 +32,15 @@ export default function Dashboard(props) {
   const [dogBreed, setDogBreed] = useState(null);
   const [dogBirthday, setDogBirthday] = useState(null);
 
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (loading)
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
+  }, [loading]);
+
   useEffect(() => {
     if (
       !dogName &&
@@ -131,7 +140,7 @@ export default function Dashboard(props) {
     setDetailsUpdated(true);
     FSServices.updateDogRecord(dogId, updatedStore);
   };
-
+  if (loading) return <h2>Fetching Dogs</h2>;
   if (dogId && dogName && dogBreed && dogBirthday)
     return (
       <div id={"dashboard_main"}>

@@ -12,9 +12,9 @@ export default function UserLogin(props) {
     const login = await FSServices.signInUser(email, password);
     if (login.message) setError(login.message);
     else {
-      let userData = await FSServices.fetchUserData(login);
-      props.setUserId(userData);
-      props.setDisplay(null);
+      let userData = await FSServices.fetchUserRecords(login);
+      props.setUserId(userData.id);
+      props.setView(null);
     }
   };
 

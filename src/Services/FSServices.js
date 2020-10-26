@@ -117,21 +117,21 @@ const FSServices = {
   //       });
   //   },
 
-  //   async signInUser(email, password) {
-  //     return await app
-  //       .auth()
-  //       .signInWithEmailAndPassword(email, password)
-  //       .then((user) => {
-  //         return user.user.uid;
-  //       })
-  //       .catch((error) => {
-  //         const err = {
-  //           code: error.code,
-  //           message: error.message,
-  //         };
-  //         return err;
-  //       });
-  //   },
+  async signInUser(email, password) {
+    return await app
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then((user) => {
+        return user.user.uid;
+      })
+      .catch((error) => {
+        const err = {
+          code: error.code,
+          message: error.message,
+        };
+        return err;
+      });
+  },
 
   //   async getDog(userId) {
   //     return db.collection("dogs").where("userId", "==", userId).get();

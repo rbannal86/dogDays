@@ -14,13 +14,13 @@ function App() {
   const [dogList, setDogList] = useState(null);
   const [view, setView] = useState(null);
 
-  //replace useEffect with setData from login
-  // useEffect(() => {
-  //   if (userId)
-  //     FSServices.fetchUserRecords(userId).then((res) => {
-  //       setUserData(res);
-  //     });
-  // }, [userId]);
+  // replace useEffect with setData from login
+  useEffect(() => {
+    if (userId)
+      FSServices.fetchUserRecords(userId).then((res) => {
+        setUserData(res);
+      });
+  }, [userId]);
 
   useEffect(() => {
     const fetchAllDogRecords = async () => {
@@ -48,7 +48,9 @@ function App() {
       {view === "register" ? (
         <UserRegister setUserId={setUserId} setView={setView} />
       ) : null}
-      {view === "login" ? <UserLogin /> : null}
+      {view === "login" ? (
+        <UserLogin setView={setView} setUserId={setUserId} />
+      ) : null}
       {view === "adddog" ? (
         <AddDog
           userId={userId}
