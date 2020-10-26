@@ -18,7 +18,6 @@ const FSServices = {
   },
 
   async fetchUserRecords(userId) {
-    console.log("fetching user records");
     return await db
       .collection("users")
       .doc(userId)
@@ -82,6 +81,14 @@ const FSServices = {
 
     await db.collection("users").doc(userId).set(userObj);
     return userObj;
+  },
+
+  async deleteDog(dogId, userData) {
+    await db.collection("dogs").doc(dogId).delete();
+    let updatedUserData = userData;
+    updatedUserData.dogs = userData.dogs.filter((dog) => dog !== dogId);
+    await db.collection("users").doc(userData.id).set(updatedUserData);
+    return updatedUserData;
   },
   //   async fetchDogRecords(dateId, dogId) {
   //     return db

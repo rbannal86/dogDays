@@ -33,6 +33,15 @@ export default function Dashboard(props) {
   const [dogBirthday, setDogBirthday] = useState(null);
 
   useEffect(() => {
+    if (!dogName && !dogBreed && !dogBirthday && !record && dogId) {
+      setDogName(props.dogList[0].dogName);
+      setDogBreed(props.dogList[0].dogBreed);
+      setDogBirthday(props.dogList[0].dogBirthday);
+      setRecord(props.dogList[0].record);
+    }
+  }, [dogBirthday, dogBreed, dogId, dogName, props.dogList, record]);
+
+  useEffect(() => {
     if (detailsUpdated) setDetailsUpdated(false);
   }, [detailsUpdated]);
 
@@ -116,7 +125,7 @@ export default function Dashboard(props) {
     FSServices.updateDogRecord(dogId, updatedStore);
   };
 
-  if (dogId)
+  if (dogId && dogName && dogBreed && dogBirthday)
     return (
       <div id={"dashboard_main"}>
         <h3
@@ -147,6 +156,11 @@ export default function Dashboard(props) {
             setDogBirthday={setDogBirthday}
             setDogName={setDogName}
             setDogBreed={setDogBreed}
+            setDogList={props.setDogList}
+            setUserData={props.setUserData}
+            userData={props.userData}
+            setDogId={setDogId}
+            setToggleDogDetails={setToggleDogDetails}
           />
         ) : null}
         <Sidebar

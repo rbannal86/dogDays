@@ -36,7 +36,7 @@ function App() {
 
   return (
     <div className="App">
-      {userData ? (
+      {userData && dogList ? (
         <Dashboard
           userData={userData}
           dogList={dogList}

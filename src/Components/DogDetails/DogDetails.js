@@ -33,6 +33,20 @@ export default function DogDetails(props) {
     }
   }, [unformattedDate, toggleEdit]);
 
+  const handleDelete = async () => {
+    let newUserData = await FSServices.deleteDog(props.dogId, props.userData);
+    props.setUserData(newUserData);
+    let newDogList = [];
+    await FSServices.fetchAllDogRecords(props.userData.id).then((res) => {
+      res.forEach((doc) => {
+        newDogList.push(doc.data());
+      });
+    });
+    props.setDogList(newDogList);
+    props.setDogId(null);
+    props.setToggleDogDetails(false);
+  };
+
   if (!toggleEdit)
     return (
       <div className={"dog_details_main"}>
@@ -45,6 +59,13 @@ export default function DogDetails(props) {
           }}
         >
           Edit Details
+        </button>
+        <button
+          onClick={() => {
+            handleDelete();
+          }}
+        >
+          Delete Dog
         </button>
       </div>
     );
