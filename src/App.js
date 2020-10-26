@@ -42,9 +42,15 @@ function App() {
     }
   }, [dogList, userData]);
 
+  const handleLogOut = () => {
+    setUserId(null);
+    setUserData(null);
+    setDogList(null);
+  };
+
   return (
     <div className="App">
-      <Header setView={setView} />
+      <Header setView={setView} userId={userId} handleLogOut={handleLogOut} />
       {view === "register" ? (
         <UserRegister setUserId={setUserId} setView={setView} />
       ) : null}
