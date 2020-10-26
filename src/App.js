@@ -1,18 +1,26 @@
 import React, { useState, useEffect } from "react";
 import Dashboard from "./Components/Dashboard/Dashboard";
+import Header from "./Components/Header/Header";
 import FSServices from "./Services/FSServices";
+import UserRegister from "./Components/UserRegister/UserRegister";
+import UserLogin from "./Components/UserLogin/UserLogin";
+import AddDog from "./Components/AddDog/AddDog";
+
 import "./App.css";
 
 function App() {
+  const [userId, setUserId] = useState(null);
   const [userData, setUserData] = useState(null);
   const [dogList, setDogList] = useState(null);
+  const [view, setView] = useState(null);
 
   //replace useEffect with setData from login
-  useEffect(() => {
-    FSServices.fetchUserRecords("1DS5kpDKADXHoN8hHhucsFE6ikK2").then((res) => {
-      setUserData(res);
-    });
-  }, []);
+  // useEffect(() => {
+  //   if (userId)
+  //     FSServices.fetchUserRecords(userId).then((res) => {
+  //       setUserData(res);
+  //     });
+  // }, [userId]);
 
   useEffect(() => {
     const fetchAllDogRecords = async () => {
@@ -36,19 +44,27 @@ function App() {
 
   return (
     <div className="App">
-      {userData && dogList ? (
+      <Header setView={setView} />
+      {view === "register" ? (
+        <UserRegister setUserId={setUserId} setView={setView} />
+      ) : null}
+      {view === "login" ? <UserLogin /> : null}
+      {view === "adddog" ? (
+        <AddDog
+          userId={userId}
+          setUserData={setUserData}
+          setDogList={setDogList}
+          setToggleAddDog={setView}
+        />
+      ) : null}
+      {userData && dogList && !view ? (
         <Dashboard
           userData={userData}
           dogList={dogList}
           setUserData={setUserData}
           setDogList={setDogList}
         />
-      ) : (
-        <div>
-          <button>Log In</button>
-          <button>Register</button>
-        </div>
-      )}
+      ) : null}
     </div>
   );
 }

@@ -181,23 +181,24 @@ const FSServices = {
   //     return getDoc;
   //   },
 
-  //   async registerNewUser(email, password, displayName) {
-  //     console.log("registering new user");
-  //     try {
-  //       let user = await app
-  //         .auth()
-  //         .createUserWithEmailAndPassword(email, password);
-  //       let userObj = {
-  //         id: user.user.uid,
-  //         displayName,
-  //       };
-  //       await db.collection("users").doc(userObj.id).set(userObj);
-  //       return await this.fetchUserData(user.user.uid);
-  //     } catch (error) {
-  //       console.log(error);
-  //       return error;
-  //     }
-  //   },
+  async registerNewUser(email, password, displayName) {
+    console.log("registering new user");
+    try {
+      let user = await app
+        .auth()
+        .createUserWithEmailAndPassword(email, password);
+      let userObj = {
+        id: user.user.uid,
+        displayName,
+        dogs: [],
+      };
+      await db.collection("users").doc(userObj.id).set(userObj);
+      return await this.fetchUserRecords(user.user.uid);
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  },
 
   //   // async creatMonthRecord(docId, dogId) {
   //   //   const monthRef = db.collection('dogs').doc(dogId).collection('records')

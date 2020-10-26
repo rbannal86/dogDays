@@ -20,8 +20,9 @@ export default function UserRegister(props) {
       );
     if (password !== confirmPassword) return setError("Password don't match");
     let userId = await FSServices.registerNewUser(email, password, userName);
-    props.setUserId(userId);
-    props.setDisplay(null);
+    console.log(userId);
+    props.setUserId(userId.id);
+    props.setView("adddog");
   };
 
   const setInputState = (e) => {

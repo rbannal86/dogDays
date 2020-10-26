@@ -33,7 +33,14 @@ export default function Dashboard(props) {
   const [dogBirthday, setDogBirthday] = useState(null);
 
   useEffect(() => {
-    if (!dogName && !dogBreed && !dogBirthday && !record && dogId) {
+    if (
+      !dogName &&
+      !dogBreed &&
+      !dogBirthday &&
+      !record &&
+      dogId &&
+      props.dogList.length > 0
+    ) {
       setDogName(props.dogList[0].dogName);
       setDogBreed(props.dogList[0].dogBreed);
       setDogBirthday(props.dogList[0].dogBirthday);
