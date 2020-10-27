@@ -41,7 +41,7 @@
   }
 }
 
-@media only screen and (min-width: 750px) {
+@media only screen and (min-width: 1000px) {
   .header_content {
     margin-top: 1%;
     margin-right: 10%;

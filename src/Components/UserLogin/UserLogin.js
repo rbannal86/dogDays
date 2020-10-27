@@ -1,11 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FSServices from "../../Services/FSServices";
 import DogForm from "../Forms/DogForm";
+
+import "./UserLogin.css";
 
 export default function UserLogin(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+
+  useEffect(() => {
+    document.getElementById("login_email").focus();
+  }, []);
+
+  useEffect(() => {
+    document
+      .getElementById("user_login_main_id")
+      .scrollIntoView({ behavior: "smooth" });
+  });
 
   const submitLogin = async (e) => {
     e.preventDefault();
@@ -19,8 +31,8 @@ export default function UserLogin(props) {
   };
 
   return (
-    <div>
-      <h2>Log In</h2>
+    <div className={"user_login_main"} id={"user_login_main_id"}>
+      <h2 className={"user_login_title"}>Log In</h2>
       <form
         onSubmit={(e) => submitLogin(e)}
         onChange={() => {
@@ -30,7 +42,7 @@ export default function UserLogin(props) {
         <DogForm
           class={"login_email"}
           handleChange={setEmail}
-          label={"Email: "}
+          label={"Email"}
           type={"email"}
           placeholder={"dog.person@woof.com"}
           value={email}
@@ -38,15 +50,20 @@ export default function UserLogin(props) {
         <DogForm
           class={"login_password"}
           handleChange={setPassword}
-          label={"Password: "}
+          label={"Password"}
           type={"password"}
           placeholder={"password"}
           value={password}
         />
-        <button>Log In</button>
-        {error ? <h3>{error}</h3> : <></>}
+        <button className={"user_login_button"}>Log In</button>
+        <button
+          className={"user_login_button"}
+          onClick={() => props.setDisplay(null)}
+        >
+          Cancel
+        </button>
+        {error ? <div className={"login_error"}>{error}</div> : <></>}
       </form>
-      <button onClick={() => props.setDisplay(null)}>Cancel</button>
     </div>
   );
 }
