@@ -1,4 +1,4 @@
-.user_login_main {
+.user_register_main {
   margin: 10%;
   padding: 10%;
   padding-top: 5%;
@@ -10,11 +10,11 @@
   justify-content: space-evenly;
 }
 
-.user_login_title {
+.user_register_title {
   text-decoration: underline;
 }
 
-.user_login_button {
+.user_register_button {
   width: 50%;
   font-size: 1rem;
   margin-top: 5%;
@@ -24,7 +24,7 @@
   align-self: center;
 }
 
-.user_login_main input {
+.user_register_main input {
   margin-bottom: 5%;
   margin-top: 3%;
   font-size: 0.9rem;
@@ -34,40 +34,42 @@
   width: stretch;
 }
 
-.login_error {
+.register_error {
   margin-top: 5%;
   width: stretch;
   width: 80%;
 }
 
 @media only screen and (min-width: 750px) {
-  .user_login_main {
+  .user_register_main {
     margin-top: 3%;
   }
 
-  .login_error {
+  .register_error {
     margin-top: 3%;
   }
 }
 
 @media only screen and (min-width: 1000px) {
-  .user_login_title {
+  .user_register_title {
     font-size: 2.5rem;
   }
 
-  .user_login_main label {
+  .user_register_main label {
     font-size: 1.5rem;
   }
 
-  .user_login_main input {
+  .user_register_main input {
+    margin-top: 2%;
+    margin-bottom: 2%;
     font-size: 1.3rem;
   }
 
-  .user_login_button {
+  .user_register_button {
     font-size: 1.5rem;
   }
 
-  .login_error {
+  .register_error {
     font-size: 1.5rem;
   }
 }

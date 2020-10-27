@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FSServices from "../../Services/FSServices";
+
+import "./UserRegister.css";
 
 export default function UserRegister(props) {
   const [error, setError] = useState("");
@@ -11,6 +13,13 @@ export default function UserRegister(props) {
   let passRegex = new RegExp(
     "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
   );
+
+  useEffect(() => {
+    document.getElementById("user_email").focus();
+    document
+      .getElementById("user_register_main_id")
+      .scrollIntoView({ behavior: "smooth" });
+  }, []);
 
   const submitRegistration = async (e) => {
     e.preventDefault();
@@ -46,8 +55,8 @@ export default function UserRegister(props) {
   };
 
   return (
-    <div>
-      <h2>Register</h2>
+    <div className={"user_register_main"} id={"user_register_main_id"}>
+      <h2 className={"user_register_title"}>Register</h2>
       <form onSubmit={(e) => submitRegistration(e)}>
         <label htmlFor="user_email">Email: </label>
         <input
@@ -85,9 +94,15 @@ export default function UserRegister(props) {
           onChange={(e) => setInputState(e)}
           required
         />
-        <button>Register</button>
+        <button className={"user_register_button"}>Register</button>
+        <button
+          className={"user_register_button"}
+          onClick={() => props.setDisplay(null)}
+        >
+          Cancel
+        </button>
       </form>
-      <button onClick={() => props.setDisplay(null)}>Cancel</button>
+      <div className={"register_error"}>{error ? error : null}</div>
     </div>
   );
 }

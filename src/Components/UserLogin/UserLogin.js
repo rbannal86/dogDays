@@ -11,13 +11,10 @@ export default function UserLogin(props) {
 
   useEffect(() => {
     document.getElementById("login_email").focus();
-  }, []);
-
-  useEffect(() => {
     document
       .getElementById("user_login_main_id")
       .scrollIntoView({ behavior: "smooth" });
-  });
+  }, []);
 
   const submitLogin = async (e) => {
     e.preventDefault();
