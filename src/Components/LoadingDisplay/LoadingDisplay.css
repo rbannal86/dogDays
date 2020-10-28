@@ -1,0 +1,45 @@
+.loading_display_main {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 80%;
+  margin: auto;
+}
+
+.loading_display_box {
+  width: 10%;
+  top: 0;
+  padding-top: 10%;
+  background-color: snow;
+}
+
+.zero {
+  background-color: #4c0a44;
+}
+.one {
+  background-color: #522560;
+}
+.two {
+  background-color: #543c7b;
+}
+.three {
+  background-color: #515395;
+}
+.four {
+  background-color: #4a69ad;
+}
+.five {
+  background-color: #3f80c2;
+}
+.six {
+  background-color: #3297d4;
+}
+.seven {
+  background-color: #29aee3;
+}
+.eight {
+  background-color: #2cc5ef;
+}
+.nine {
+  background-color: #40dbf9;
+}

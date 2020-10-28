@@ -6,6 +6,7 @@ import Sidebar from "../Sidebar/Sidebar";
 import DetailList from "../DetailList/DetailList";
 import DogDetails from "../DogDetails/DogDetails";
 import AddDog from "../AddDog/AddDog";
+import LoadingDisplay from "../LoadingDisplay/LoadingDisplay";
 
 import FSServices from "../../Services/FSServices";
 import DogSelection from "../DogSelection/DogSelection";
@@ -140,7 +141,14 @@ export default function Dashboard(props) {
     setDetailsUpdated(true);
     FSServices.updateDogRecord(dogId, updatedStore);
   };
-  if (loading) return <h2>Fetching Dogs</h2>;
+
+  if (loading)
+    return (
+      <>
+        <h2>Fetching Dogs</h2>
+        <LoadingDisplay loading={loading} />
+      </>
+    );
   if (dogId && dogName && dogBreed && dogBirthday)
     return (
       <div id={"dashboard_main"}>
