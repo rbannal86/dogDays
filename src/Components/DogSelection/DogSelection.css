@@ -1,5 +1,5 @@
 .dog_selection_main {
-  width: 80%;
+  width: 50%;
   margin: auto;
   padding: 0;
   padding-top: 5%;
@@ -11,10 +11,34 @@
 
 .dog_selection_title {
   text-decoration: underline;
+  font-size: 1rem;
 }
 
 .dog_selection_list {
   list-style: none;
   padding: 0;
   line-height: 1.5rem;
+}
+
+@media only screen and (min-width: 750px) {
+  .dog_selection_title {
+    font-size: 1.4rem;
+  }
+
+  @media only screen and (min-width: 1000px) {
+    .dog_selection_main {
+      margin-top: 3%;
+      padding-bottom: 2%;
+      padding-top: 2%;
+    }
+
+    .dog_selection_title {
+      font-size: 1.8rem;
+    }
+
+    .dog_selection_list {
+      font-size: 1.5rem;
+      line-height: 2rem;
+    }
+  }
 }

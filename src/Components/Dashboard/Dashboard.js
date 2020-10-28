@@ -27,7 +27,7 @@ export default function Dashboard(props) {
   const [toggleAddDog, setToggleAddDog] = useState(false);
 
   //Dog Information State
-  const [dogId, setDogId] = useState(null);
+  const [dogId, setDogId] = useState("9wqBrOjny3hZzOu9voV0");
   const [dogName, setDogName] = useState(null);
   const [record, setRecord] = useState(null);
   const [dogBreed, setDogBreed] = useState(null);
@@ -142,7 +142,7 @@ export default function Dashboard(props) {
     FSServices.updateDogRecord(dogId, updatedStore);
   };
 
-  if (loading)
+  if (loading && !dogId && !dogName && !dogBreed && !dogBirthday)
     return (
       <>
         <h2>Fetching Dogs</h2>
