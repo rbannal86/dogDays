@@ -5,6 +5,7 @@ import FSServices from "./Services/FSServices";
 import UserRegister from "./Components/UserRegister/UserRegister";
 import UserLogin from "./Components/UserLogin/UserLogin";
 import AddDog from "./Components/AddDog/AddDog";
+import ReactTooltip from "react-tooltip";
 
 import "./App.css";
 
@@ -50,6 +51,7 @@ function App() {
 
   return (
     <div className="App">
+      <ReactTooltip event={"onHover"} />
       <Header setView={setView} userId={userId} handleLogOut={handleLogOut} />
       {view === "register" ? (
         <UserRegister setUserId={setUserId} setView={setView} />

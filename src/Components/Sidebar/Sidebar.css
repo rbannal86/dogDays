@@ -1,0 +1,28 @@
+.sidebar_main {
+  display: flex;
+  justify-content: space-evenly;
+  border-bottom: 2px snow solid;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  background-color: #515395;
+}
+
+.sidebar_button {
+  background-color: transparent;
+  border: none;
+  color: snow;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.open {
+  color: #40dbf9;
+}
+
+@media only screen and (min-width: 1000px) {
+  .sidebar_main {
+    padding-top: 1%;
+    padding-bottom: 1%;
+  }
+}

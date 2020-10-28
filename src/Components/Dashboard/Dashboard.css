@@ -1,0 +1,14 @@
+.dashboard_main {
+  width: 80%;
+  border: 2px snow solid;
+  margin: auto;
+}
+
+.dashboard_information {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  border-bottom: 2px snow solid;
+  color: black;
+  background-color: #4a69ad;
+}

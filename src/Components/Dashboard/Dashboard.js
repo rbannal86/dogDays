@@ -11,6 +11,8 @@ import LoadingDisplay from "../LoadingDisplay/LoadingDisplay";
 import FSServices from "../../Services/FSServices";
 import DogSelection from "../DogSelection/DogSelection";
 
+import "./Dashboard.css";
+
 export default function Dashboard(props) {
   const [currentDate, setCurrentDate] = useState();
   const [selectedDate, setSelectedDate] = useState();
@@ -151,16 +153,29 @@ export default function Dashboard(props) {
     );
   if (dogId && dogName && dogBreed && dogBirthday)
     return (
-      <div id={"dashboard_main"}>
-        <h3
-          className={"dashboard_date"}
-          onClick={() => setSelectedDate(new Date())}
-        >
-          {currentDate ? currentDate : null}
-        </h3>
-        <h4>
-          {props.userData.displayName ? props.userData.displayName : null}
-        </h4>
+      <div className={"dashboard_main"}>
+        <div className={"dashboard_information"}>
+          <h4
+            className={"dashboard_date"}
+            onClick={() => setSelectedDate(new Date())}
+          >
+            {currentDate ? currentDate : null}
+          </h4>
+          <h4 className={"dashboard_display_name"}>
+            {props.userData.displayName ? props.userData.displayName : null}
+          </h4>
+        </div>
+        <Sidebar
+          setToggleDetails={setToggleDetails}
+          toggleDetails={toggleDetails}
+          setRecord={setRecord}
+          setDogId={setDogId}
+          setDogName={setDogName}
+          setToggleDogDetails={setToggleDogDetails}
+          toggleDogDetails={toggleDogDetails}
+          setToggleAddDog={setToggleAddDog}
+          toggleAddDog={toggleAddDog}
+        />
         {toggleAddDog ? (
           <AddDog
             setToggleAddDog={setToggleAddDog}
@@ -187,17 +202,7 @@ export default function Dashboard(props) {
             setToggleDogDetails={setToggleDogDetails}
           />
         ) : null}
-        <Sidebar
-          setToggleDetails={setToggleDetails}
-          toggleDetails={toggleDetails}
-          setRecord={setRecord}
-          setDogId={setDogId}
-          setDogName={setDogName}
-          setToggleDogDetails={setToggleDogDetails}
-          toggleDogDetails={toggleDogDetails}
-          setToggleAddDog={setToggleAddDog}
-          toggleAddDog={toggleAddDog}
-        />
+
         {toggleDetailList ? (
           <DetailList
             details={details}
