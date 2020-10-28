@@ -1,0 +1,20 @@
+.dog_selection_main {
+  width: 80%;
+  margin: auto;
+  padding: 0;
+  padding-top: 5%;
+  padding-bottom: 10%;
+  margin-top: 5%;
+  background-color: #515395;
+  border: 2px snow solid;
+}
+
+.dog_selection_title {
+  text-decoration: underline;
+}
+
+.dog_selection_list {
+  list-style: none;
+  padding: 0;
+  line-height: 1.5rem;
+}

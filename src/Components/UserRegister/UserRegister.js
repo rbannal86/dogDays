@@ -97,7 +97,7 @@ export default function UserRegister(props) {
         <button className={"user_register_button"}>Register</button>
         <button
           className={"user_register_button"}
-          onClick={() => props.setDisplay(null)}
+          onClick={() => props.setView(null)}
         >
           Cancel
         </button>

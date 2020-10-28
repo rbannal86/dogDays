@@ -9,7 +9,7 @@ import AddDog from "./Components/AddDog/AddDog";
 import "./App.css";
 
 function App() {
-  const [userId, setUserId] = useState(null);
+  const [userId, setUserId] = useState("1DS5kpDKADXHoN8hHhucsFE6ikK2");
   const [userData, setUserData] = useState(null);
   const [dogList, setDogList] = useState(null);
   const [view, setView] = useState(null);
