@@ -4,6 +4,8 @@ import Month from "../Month/Month";
 import Week from "../Week/Week";
 import CalendarNav from "../CalendarNav/CalendarNav";
 
+import "./Calendar.css";
+
 export default function Calendar(props) {
   const [year, setYear] = useState(null);
   const [month, setMonth] = useState(null);
@@ -62,7 +64,7 @@ export default function Calendar(props) {
   };
   if (record)
     return (
-      <div id="calendar_main">
+      <div className="calendar_main">
         {dayLoaded ? (
           <>
             {props.view === "year" ? (

@@ -7,8 +7,7 @@ export default function Header(props) {
   return (
     <div className={"header_main"}>
       <HeaderDeco />
-      <div className={"header_content"}>
-        {" "}
+      <div className={"header_content"} id={"header_content_id"}>
         <h1 className={"header_title"}>dogDays</h1>
         {props.userId ? (
           <div className={"header_button_div"}>

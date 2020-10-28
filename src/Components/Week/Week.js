@@ -51,5 +51,12 @@ export default function Week(props) {
     );
   };
 
-  return <div id={"week_main"}>{renderDays()}</div>;
+  return (
+    <div id={"week_main"}>
+      <h3>
+        Week of {props.month + 1}/{props.date}/{props.year}
+      </h3>
+      {renderDays()}
+    </div>
+  );
 }

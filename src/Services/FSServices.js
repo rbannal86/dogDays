@@ -37,6 +37,7 @@ const FSServices = {
         if (!doc.exists) console.log("Record Does Not Exist");
         else return doc.data();
       });
+    console.log(record);
     dogObj.record = [];
     dogObj.record = record;
     db.collection("dogs").doc(dogId).set(dogObj);

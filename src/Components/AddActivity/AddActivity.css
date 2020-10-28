@@ -1,0 +1,78 @@
+.add_activity_main {
+  margin: auto;
+  margin-top: 0;
+  background-color: rgb(108, 103, 109);
+  background-color: snow;
+  padding-top: 3%;
+  padding-bottom: 3%;
+  border-bottom: 2px snow solid;
+}
+
+.add_activity_title {
+  font-size: 0.9rem;
+  color: #4c0a44;
+}
+
+.add_activity_buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.add_activity_button {
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: inherit;
+  font-size: 3rem;
+}
+
+#add_activity_button_low {
+  color: #4c0a44;
+}
+
+#add_activity_button_medium {
+  color: #3297d4;
+}
+
+#add_activity_button_high {
+  color: #40dbf9;
+}
+
+.add_activity_buttons_section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 30%;
+  width: 50%;
+  margin: auto;
+}
+
+.add_activity_activity_button {
+  border: none;
+  background-color: #3297d4;
+  width: 90%;
+  font-size: 1rem;
+  margin: auto;
+  margin-top: 3%;
+  line-height: 1.5rem;
+  color: snow;
+}
+
+@media only screen and (min-width: 1000px) {
+  .add_activity_title {
+    font-size: 1.8rem;
+  }
+
+  .add_activity_activity_button {
+    font-size: 1.5rem;
+    width: 60%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+  }
+
+  .add_activity_button {
+    font-size: 6rem;
+  }
+}
