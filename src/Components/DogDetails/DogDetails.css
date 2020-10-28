@@ -1,0 +1,35 @@
+.dog_details_main {
+  background-color: #522560;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  border-bottom: 2px snow solid;
+}
+
+.dog_details_title {
+  margin-top: 0;
+  font-size: 1.3rem;
+}
+
+.dog_details_label {
+  margin-bottom: 3%;
+  font-size: 1rem;
+}
+
+.dog_details_buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 60%;
+  margin: auto;
+  margin-top: 3%;
+}
+
+.dog_details_button {
+  background-color: inherit;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  color: #2cc5ef;
+}

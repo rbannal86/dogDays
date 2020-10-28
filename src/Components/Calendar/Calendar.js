@@ -71,6 +71,7 @@ export default function Calendar(props) {
   if (record)
     return (
       <div className="calendar_main">
+        <CalendarNav handleNavClick={handleNavClick} />
         {dayLoaded ? (
           <>
             {props.view === "year" ? (
@@ -108,7 +109,6 @@ export default function Calendar(props) {
             ) : null}
           </>
         ) : null}
-        <CalendarNav handleNavClick={handleNavClick} />
       </div>
     );
   else return <h2>Fetching Data</h2>;
