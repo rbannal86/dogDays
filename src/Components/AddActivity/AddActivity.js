@@ -14,7 +14,7 @@ export default function AddActivity(props) {
     const submitActivity = () => {
       props.handleAddActivitySubmit(activity, parseInt(value));
     };
-    if (value) submitActivity();
+    if (value || value?.toString() === "0") submitActivity();
   }, [activity, props, value]);
 
   const handleSetValue = (value) => {

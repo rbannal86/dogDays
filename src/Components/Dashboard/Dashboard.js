@@ -98,7 +98,10 @@ export default function Dashboard(props) {
           setRecordKey(recordKey);
           setToggleDetailList(true);
           setDetails(record[recordKey][day].activities);
-        } else setDetails("empty");
+        } else {
+          setToggleDetailList(true);
+          setDetails("empty");
+        }
       }
     }
   };
@@ -215,6 +218,8 @@ export default function Dashboard(props) {
         {toggleDetailList ? (
           <DetailList
             details={details}
+            recordKey={recordKey}
+            day={day}
             handleActivityDelete={handleActivityDelete}
           />
         ) : null}
@@ -230,6 +235,9 @@ export default function Dashboard(props) {
           handleAddActivity={handleAddActivity}
           record={record}
           birthday={dogBirthday}
+          toggleDetails={toggleDetails}
+          toggleDetailList={toggleDetailList}
+          setToggleDetailList={setToggleDetailList}
         />
       </div>
     );

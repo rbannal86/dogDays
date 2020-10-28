@@ -1,5 +1,6 @@
 import React from "react";
 import DayBox from "../DayBox/DayBox";
+import CakeIcon from "@material-ui/icons/Cake";
 
 import "./Week.css";
 
@@ -43,7 +44,11 @@ export default function Week(props) {
               className={"week_list_item " + birthdayToggle}
               onClick={() => props.handleAddActivity(day, recordKeyObject[day])}
             >
-              <DayBox date={day} aggregate={recordArray[index]} />
+              {birthdayToggle === "birthday" ? (
+                <CakeIcon />
+              ) : (
+                <DayBox date={day} aggregate={recordArray[index]} />
+              )}
             </li>
           );
         })}
@@ -52,8 +57,8 @@ export default function Week(props) {
   };
 
   return (
-    <div id={"week_main"}>
-      <h3>
+    <div className={"week_main"}>
+      <h3 className={"week_title"}>
         Week of {props.month + 1}/{props.date}/{props.year}
       </h3>
       {renderDays()}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import DayBox from "../DayBox/DayBox";
+import CakeIcon from "@material-ui/icons/Cake";
 
 import "./Month.css";
 
@@ -101,6 +102,7 @@ export default function Month(props) {
                 key={index}
                 onClick={() => handleClick(day)}
               >
+                {birthdayToggle === "birthday" ? <CakeIcon /> : null}
                 <DayBox date={day} aggregate={aggregate} />
               </li>
             );

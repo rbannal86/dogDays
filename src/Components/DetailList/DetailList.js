@@ -1,17 +1,35 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import HighlightOffIcon from "@material-ui/icons/HighlightOff";
+
+import "./DetailList.css";
 
 export default function DetailList(props) {
+  const [formattedDate, setFormattedDate] = useState("");
+
+  useEffect(() => {
+    if (props.recordKey) {
+      let month = props.recordKey.slice(0, 2);
+      if (month[0] === "0") month = month.slice(0);
+      let year = props.recordKey.slice(2);
+      let newFormattedDate = month + "/" + props.day + "/" + year;
+      setFormattedDate(newFormattedDate);
+    }
+  }, [props.day, props.recordKey]);
+
   const renderDetails = () => {
     if (props.details === "empty") return <div>Nothing Recorded</div>;
     else {
       return (
-        <ul>
+        <ul className={"detail_list"}>
           {props.details.map((detail, index) => {
             return (
-              <li key={"detail" + index}>
+              <li key={"detail" + index} className={"detail_list_item"}>
                 {Object.keys(detail)}: {detail[Object.keys(detail)[0]]}
-                <button onClick={() => props.handleActivityDelete(index)}>
-                  x
+                <button
+                  className={"detail_list_item_button"}
+                  onClick={() => props.handleActivityDelete(index)}
+                >
+                  <HighlightOffIcon fontSize={"inherit"} />
                 </button>
               </li>
             );
@@ -21,5 +39,10 @@ export default function DetailList(props) {
     }
   };
 
-  return <div className={"detail_list_main"}>{renderDetails()}</div>;
+  return (
+    <div className={"detail_list_main"}>
+      <h3 className={"detail_list_title"}>Activities for {formattedDate}</h3>
+      {renderDetails()}
+    </div>
+  );
 }

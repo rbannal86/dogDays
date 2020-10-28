@@ -42,7 +42,13 @@ export default function Calendar(props) {
 
   const handleMonthClick = (day) => {
     props.setSelectedDate(new Date(year, month, day));
-    props.setView("week");
+    if (!props.toggleDetails) props.setView("week");
+    else {
+      let recordKey;
+      if (month < 9) recordKey = "0" + (month + 1).toString() + year;
+      else recordKey = (month + 1).toString() + year;
+      props.handleAddActivity(day, recordKey);
+    }
   };
 
   const handleNavClick = (direction) => {

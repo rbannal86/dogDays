@@ -13,4 +13,6 @@
 .month_list_item {
   width: 25px;
   height: 25px;
+  border: 1px snow solid;
+  font-size: 0.7rem;
 }

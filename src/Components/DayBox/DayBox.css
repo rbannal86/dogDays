@@ -1,19 +1,48 @@
 .daybox {
-  background-color: lightgray;
+  height: inherit;
+  width: inherit;
 }
 
 .empty {
-  background-color: white;
+  background-color: inherit;
 }
 
-.red {
-  background-color: red;
+.ten {
+  background-color: #40dbf9;
 }
 
-.yellow {
-  background-color: yellow;
+.nine {
+  background-color: #2cc5ef;
 }
 
-.green {
-  background-color: green;
+.eight {
+  background-color: #29aee3;
+}
+
+.seven {
+  background-color: #3297d4;
+}
+
+.six {
+  background-color: #3f80c2;
+}
+
+.five {
+  background-color: #4a69ad;
+}
+
+.four {
+  background-color: #515395;
+}
+
+.three {
+  background-color: #543c7b;
+}
+
+.two {
+  background-color: #522560;
+}
+
+.one {
+  background-color: #4c0a44;
 }

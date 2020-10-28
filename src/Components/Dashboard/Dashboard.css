@@ -2,6 +2,7 @@
   width: 80%;
   border: 2px snow solid;
   margin: auto;
+  margin-bottom: 10%;
 }
 
 .dashboard_information {
@@ -27,10 +28,6 @@
 }
 
 @media only screen and (min-width: 1000px) {
-  .dashboard_main {
-    margin-bottom: 20%;
-  }
-
   .dashboard_information {
     font-size: 1.5rem;
   }
