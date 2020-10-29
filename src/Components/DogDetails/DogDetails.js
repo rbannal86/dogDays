@@ -15,6 +15,15 @@ export default function DogDetails(props) {
   const [dogBirthday, setDogBirthday] = useState(null);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [toggleConfirm, setToggleConfirm] = useState(false);
+  const [deleted, setDeleted] = useState(false);
+
+  useEffect(() => {
+    document
+      .getElementById("dog_details_top")
+      .scrollIntoView({ behavior: "smooth" });
+    if (document.getElementById("dog_details_name"))
+      document.getElementById("dog_details_name").focus();
+  });
 
   const handleSubmit = () => {
     FSServices.updateDogDetails(
@@ -47,23 +56,29 @@ export default function DogDetails(props) {
 
   const handleDelete = async () => {
     if (confirmDelete) {
-      let newUserData = await FSServices.deleteDog(props.dogId, props.userData);
-      props.setUserData(newUserData);
-      let newDogList = [];
-      await FSServices.fetchAllDogRecords(props.userData.id).then((res) => {
-        res.forEach((doc) => {
-          newDogList.push(doc.data());
+      if (!deleted) {
+        setDeleted(true);
+        setToggleConfirm(false);
+        let newUserData = await FSServices.deleteDog(
+          props.dogId,
+          props.userData
+        );
+        props.setUserData(newUserData);
+        let newDogList = [];
+        await FSServices.fetchAllDogRecords(props.userData.id).then((res) => {
+          res.forEach((doc) => {
+            newDogList.push(doc.data());
+          });
         });
-      });
-      props.setDogList(newDogList);
-      props.setDogId(null);
-      props.setToggleDogDetails(false);
+        props.setToggleDogDetails(false);
+        props.handleDeleteDog(newDogList);
+      }
     } else setToggleConfirm(true);
   };
 
   if (!toggleEdit)
     return (
-      <div className={"dog_details_main"}>
+      <div className={"dog_details_main"} id={"dog_details_top"}>
         <h2 className={"dog_details_title"}>Your Dog's Details</h2>
         <h3 className={"dog_details_label"}>Name</h3>
         <div className={"dog_details_details"}>{dogName}</div>
@@ -125,7 +140,7 @@ export default function DogDetails(props) {
     );
   else
     return (
-      <div className={"dog_details_main"}>
+      <div className={"dog_details_main"} id={"dog_details_top"}>
         <h2 className={"dog_details_title"}>Edit Details</h2>
         <form
           className={"dog_details_form"}
@@ -138,6 +153,7 @@ export default function DogDetails(props) {
           <h3 className={"dog_details_label"}>Name</h3>
           <div className={"dog_details_edit"}>
             <input
+              id={"dog_details_name"}
               className={"dog_details_input"}
               value={dogName}
               onChange={(e) => {

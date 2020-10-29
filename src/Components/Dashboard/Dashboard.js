@@ -38,7 +38,12 @@ export default function Dashboard(props) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (document.getElementById("header_content_id"))
+    if (
+      document.getElementById("header_content_id") &&
+      !toggleDetails &&
+      !toggleDogDetails &&
+      !toggleAddDog
+    )
       document
         .getElementById("header_content_id")
         .scrollIntoView({ behavior: "smooth" });
@@ -51,21 +56,25 @@ export default function Dashboard(props) {
       }, 2000);
   }, [loading]);
 
-  useEffect(() => {
-    if (
-      !dogName &&
-      !dogBreed &&
-      !dogBirthday &&
-      !record &&
-      dogId &&
-      props.dogList.length > 0
-    ) {
-      setDogName(props.dogList[0].dogName);
-      setDogBreed(props.dogList[0].dogBreed);
-      setDogBirthday(props.dogList[0].dogBirthday);
-      setRecord(props.dogList[0].record);
-    }
-  }, [dogBirthday, dogBreed, dogId, dogName, props.dogList, record]);
+  // Check if necessary
+  // useEffect(() => {
+  //   if (
+  //     !dogName &&
+  //     !dogBreed &&
+  //     !dogBirthday &&
+  //     !record &&
+  //     dogId &&
+  //     props.dogList.length > 0
+  //   ) {
+  //     console.log(props.dogList);
+  //     let dogSelected = props.dogList.filter((dog) => dog.id === dogId);
+  //     console.log();
+  //     setDogName(dogSelected[0].dogName);
+  //     setDogBreed(dogSelected[0].dogBreed);
+  //     setDogBirthday(dogSelected[0].dogBirthday);
+  //     setRecord(dogSelected[0].record);
+  //   }
+  // }, [dogBirthday, dogBreed, dogId, dogName, props.dogList, record]);
 
   useEffect(() => {
     if (detailsUpdated) setDetailsUpdated(false);
@@ -85,6 +94,26 @@ export default function Dashboard(props) {
     setSelectedDate(date);
     setCurrentDate(date.toLocaleDateString());
   }, []);
+
+  const handleNewDog = (dogId, dogList) => {
+    let newDog = dogList.filter((dog) => dog.id === dogId)[0];
+    setDogId(dogId);
+    props.setDogList(dogList);
+    setDogName(newDog.dogName);
+    setDogBreed(newDog.dogBreed);
+    setRecord(newDog.record);
+    setDogBirthday(newDog.dogBirthday);
+    setToggleAddDog(false);
+  };
+
+  const handleDeleteDog = (dogList) => {
+    props.setDogList(dogList);
+    setDogName(null);
+    setDogBreed(null);
+    setRecord(null);
+    setDogBirthday(null);
+    setDogId(null);
+  };
 
   const handleAddActivity = (day, recordKey) => {
     if (!toggleDetails) {
@@ -161,6 +190,19 @@ export default function Dashboard(props) {
         <LoadingDisplay loading={loading} />
       </>
     );
+  else if (props.dogList.length === 0)
+    return (
+      <div className={"dashboard_main"}>
+        <AddDog
+          setToggleAddDog={setToggleAddDog}
+          dogs={props.userData.dogs}
+          setUserData={props.setUserData}
+          userId={props.userData.id}
+          setDogList={props.setDogList}
+          handleNewDog={handleNewDog}
+        />
+      </div>
+    );
   if (dogId && dogName && dogBreed && dogBirthday)
     return (
       <div className={"dashboard_main"} id={"dashboard_main_id"}>
@@ -196,6 +238,7 @@ export default function Dashboard(props) {
             setUserData={props.setUserData}
             userId={props.userData.id}
             setDogList={props.setDogList}
+            handleNewDog={handleNewDog}
           />
         ) : null}
         {toggleDogDetails ? (
@@ -212,6 +255,7 @@ export default function Dashboard(props) {
             userData={props.userData}
             setDogId={setDogId}
             setToggleDogDetails={setToggleDogDetails}
+            handleDeleteDog={handleDeleteDog}
           />
         ) : null}
 

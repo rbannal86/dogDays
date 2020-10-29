@@ -37,8 +37,7 @@ const FSServices = {
         if (!doc.exists) console.log("Record Does Not Exist");
         else return doc.data();
       });
-    console.log(record);
-    dogObj.record = [];
+    dogObj.record = {};
     dogObj.record = record;
     db.collection("dogs").doc(dogId).set(dogObj);
   },
@@ -55,7 +54,6 @@ const FSServices = {
     dogObj.dogName = name;
     dogObj.dogBreed = breed;
     dogObj.dogBirthday = date;
-    console.log(dogObj);
     db.collection("dogs").doc(dogId).set(dogObj);
   },
 
@@ -64,7 +62,7 @@ const FSServices = {
       dogName,
       dogBreed,
       dogBirthday,
-      record: [],
+      record: {},
       userId,
     };
     const res = await db.collection("dogs").add(dogObj);
@@ -81,10 +79,11 @@ const FSServices = {
       });
 
     await db.collection("users").doc(userId).set(userObj);
-    return userObj;
+    return { userObj, dogId: dogObj.id };
   },
 
   async deleteDog(dogId, userData) {
+    console.log(dogId);
     await db.collection("dogs").doc(dogId).delete();
     let updatedUserData = userData;
     updatedUserData.dogs = userData.dogs.filter((dog) => dog !== dogId);

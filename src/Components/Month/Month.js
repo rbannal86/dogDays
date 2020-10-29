@@ -118,7 +118,9 @@ export default function Month(props) {
 
   return (
     <>
-      <h3>{monthNames[props.month]}</h3>
+      {props.view === "month" ? (
+        <h3>{monthNames[props.month] + " " + props.year}</h3>
+      ) : null}
       {props.view === "month" ? props.CalendarNav : null}
       <div id={"month_main"}>{renderDays()}</div>
     </>

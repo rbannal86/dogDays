@@ -1,0 +1,94 @@
+.add_dog_main {
+  background-color: #522560;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  border-bottom: 2px snow solid;
+}
+
+.add_dog_form {
+  width: 80%;
+}
+
+.add_dog_title {
+  margin-top: 0;
+  font-size: 1.3rem;
+}
+
+.add_dog_label {
+  margin-bottom: 3%;
+  font-size: 1rem;
+}
+
+.add_dog_buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 60%;
+  margin: auto;
+  margin-top: 3%;
+}
+
+.add_dog_button {
+  background-color: #16161d;
+  border: 2px snow solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  color: #2cc5ef;
+}
+
+.add_dog_form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: auto;
+}
+
+.add_dog_input {
+  margin-bottom: 5%;
+  margin-top: 3%;
+  font-size: 0.9rem;
+  background-color: #2cc5ef;
+  font-weight: bold;
+  border: 1px snow solid;
+  width: stretch;
+}
+
+@media only screen and (min-width: 1000px) {
+  .add_dog_main {
+    padding-top: 3%;
+  }
+
+  .add_dog_form {
+    width: 60%;
+  }
+
+  .add_dog_title {
+    font-size: 1.8rem;
+  }
+
+  .add_dog_label {
+    font-size: 1.4rem;
+    margin-bottom: 1%;
+  }
+
+  .add_dog_input {
+    font-size: 2rem;
+  }
+
+  .add_dog_details {
+    font-size: 1.2rem;
+  }
+
+  .add_dog_button {
+    font-size: 3rem;
+  }
+
+  .add_dog_title {
+    font-size: 1.5rem;
+    margin-top: 5%;
+  }
+}

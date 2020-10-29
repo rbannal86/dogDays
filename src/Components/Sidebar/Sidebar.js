@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
 import DetailsIcon from "@material-ui/icons/Details";
@@ -12,6 +12,10 @@ export default function Sidebar(props) {
   const [dayDetails, setDayDetails] = useState("");
   const [dogDetails, setDogDetails] = useState("");
   const [addNewDog, setAddNewDog] = useState("");
+
+  useEffect(() => {
+    if (addNewDog && !props.toggleAddDog) setAddNewDog(false);
+  }, [addNewDog, props.toggleAddDog]);
 
   const handleDayDetails = () => {
     if (dayDetails === "") setDayDetails("open");
