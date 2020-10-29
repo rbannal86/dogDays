@@ -71,7 +71,6 @@ export default function Calendar(props) {
   if (record)
     return (
       <div className="calendar_main">
-        <CalendarNav handleNavClick={handleNavClick} />
         {dayLoaded ? (
           <>
             {props.view === "year" ? (
@@ -82,10 +81,12 @@ export default function Calendar(props) {
                 handleAddActivity={null}
                 birthMonth={birthMonth}
                 birthDay={birthDay}
+                CalendarNav={CalendarNav({ handleNavClick })}
               />
             ) : null}
             {props.view === "month" ? (
               <Month
+                CalendarNav={CalendarNav({ handleNavClick })}
                 year={year}
                 month={month}
                 handleMonthClick={handleMonthClick}
@@ -93,10 +94,12 @@ export default function Calendar(props) {
                 handleAddActivity={props.handleAddActivity}
                 birthMonth={birthMonth}
                 birthDay={birthDay}
+                view={props.view}
               />
             ) : null}
             {props.view === "week" ? (
               <Week
+                CalendarNav={CalendarNav({ handleNavClick })}
                 date={date}
                 day={day}
                 month={month}

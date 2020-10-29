@@ -1,0 +1,9 @@
+.calendarnav_main {
+  position: fixed;
+}
+
+.calendarnav_button {
+  color: snow;
+  background-color: inherit;
+  border: none;
+}

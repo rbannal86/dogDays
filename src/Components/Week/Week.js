@@ -61,6 +61,7 @@ export default function Week(props) {
       <h3 className={"week_title"}>
         Week of {props.month + 1}/{props.date}/{props.year}
       </h3>
+      {props.CalendarNav}
       {renderDays()}
     </div>
   );

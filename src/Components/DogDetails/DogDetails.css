@@ -10,6 +10,10 @@
   font-size: 1.3rem;
 }
 
+#details_confirm_title {
+  margin-top: 10%;
+}
+
 .dog_details_label {
   margin-bottom: 3%;
   font-size: 1rem;
@@ -32,4 +36,59 @@
   align-items: center;
   font-size: 2rem;
   color: #2cc5ef;
+}
+
+.dog_details_form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: auto;
+}
+
+.dog_details_edit {
+  width: 60%;
+}
+
+.dog_details_input {
+  margin-bottom: 5%;
+  margin-top: 3%;
+  font-size: 0.9rem;
+  background-color: #2cc5ef;
+  font-weight: bold;
+  border: 1px snow solid;
+  width: stretch;
+}
+
+@media only screen and (min-width: 1000px) {
+  .dog_details_main {
+    padding-top: 3%;
+  }
+
+  .dog_details_title {
+    font-size: 1.8rem;
+  }
+
+  .dog_details_label {
+    font-size: 1.4rem;
+    margin-bottom: 1%;
+  }
+
+  .dog_details_details {
+    font-size: 1.2rem;
+  }
+
+  .dog_details_button {
+    font-size: 3rem;
+  }
+
+  .dog_details_title {
+    font-size: 1.5rem;
+    margin-top: 5%;
+  }
+
+  .dog_details_copy {
+    font-size: 1.2rem;
+  }
 }

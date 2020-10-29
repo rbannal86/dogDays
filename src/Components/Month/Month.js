@@ -81,12 +81,14 @@ export default function Month(props) {
         <ul className={"month_list"}>
           {monthArray.map((day, index) => {
             let birthdayToggle = "";
+            let emptyToggle = "";
             if (
               parseInt(props.month) + 1 === parseInt(props.birthMonth) &&
               day === parseInt(props.birthDay)
             )
               birthdayToggle = "birthday";
             let aggregate = null;
+            if (day === null) emptyToggle = "empty_box";
             if (props.record[recordKey] && props.record[recordKey][day]) {
               if (props.record[recordKey][day].aggregate)
                 aggregate = props.record[recordKey][day].aggregate;
@@ -98,7 +100,9 @@ export default function Month(props) {
 
             return (
               <li
-                className={"month_list_item " + birthdayToggle}
+                className={
+                  "month_list_item " + birthdayToggle + " " + emptyToggle
+                }
                 key={index}
                 onClick={() => handleClick(day)}
               >
@@ -115,6 +119,7 @@ export default function Month(props) {
   return (
     <>
       <h3>{monthNames[props.month]}</h3>
+      {props.view === "month" ? props.CalendarNav : null}
       <div id={"month_main"}>{renderDays()}</div>
     </>
   );

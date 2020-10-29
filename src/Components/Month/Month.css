@@ -16,3 +16,7 @@
   border: 1px snow solid;
   font-size: 0.7rem;
 }
+
+.empty_box {
+  border: 1px #16161d solid;
+}

@@ -47,6 +47,7 @@ export default function Year(props) {
   return (
     <>
       <h3>{props.year}</h3>
+      {props.CalendarNav}
       <div id={"year_main"}>{renderMonths()}</div>
     </>
   );
