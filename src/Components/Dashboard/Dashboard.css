@@ -30,6 +30,8 @@
 @media only screen and (min-width: 1000px) {
   .dashboard_information {
     font-size: 1.5rem;
+    padding-top: 0;
+    padding-bottom: 0;
   }
 
   .dashboard_dog_name {

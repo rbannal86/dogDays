@@ -7,3 +7,7 @@
 .birthday {
   background-color: #40dbf9;
 }
+
+#app_bottom_anchor {
+  display: none;
+}

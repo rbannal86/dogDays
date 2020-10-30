@@ -1,6 +1,6 @@
 import React from "react";
-import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
-import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 import "./CalendarNav.css";
 
@@ -12,14 +12,14 @@ export default function CalendarNav(props) {
         value={"back"}
         onClick={() => props.handleNavClick("back")}
       >
-        <ArrowBackIosIcon fontSize={"inherit"} />
+        <ArrowBackIcon fontSize={"inherit"} />
       </button>
       <button
         className={"calendarnav_button"}
         value={"forward"}
         onClick={() => props.handleNavClick("forward")}
       >
-        <ArrowForwardIosIcon fontSize={"inherit"} />
+        <ArrowForwardIcon fontSize={"inherit"} />
       </button>
     </div>
   );

@@ -20,3 +20,17 @@
 .empty_box {
   border: 1px #16161d solid;
 }
+
+@media only screen and (min-width: 750px) {
+  .month_list_item {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .month_list_item {
+    width: 60px;
+    height: 60px;
+  }
+}

@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import ReactDOM from "react-dom";
 import Calendar from "../Calendar/Calendar";
 import ViewButtons from "../ViewButtons/ViewButtons";
 import AddActivity from "../AddActivity/AddActivity";
@@ -29,7 +30,7 @@ export default function Dashboard(props) {
   const [toggleAddDog, setToggleAddDog] = useState(false);
 
   //Dog Information State
-  const [dogId, setDogId] = useState("9wqBrOjny3hZzOu9voV0");
+  const [dogId, setDogId] = useState(null);
   const [dogName, setDogName] = useState(null);
   const [record, setRecord] = useState(null);
   const [dogBreed, setDogBreed] = useState(null);
@@ -37,17 +38,15 @@ export default function Dashboard(props) {
 
   const [loading, setLoading] = useState(true);
 
+  const divEnd = useRef(null);
+
+  const scrollToBottom = () => {
+    ReactDOM.findDOMNode(divEnd.current).scrollIntoView();
+  };
+
   useEffect(() => {
-    if (
-      document.getElementById("header_content_id") &&
-      !toggleDetails &&
-      !toggleDogDetails &&
-      !toggleAddDog
-    )
-      document
-        .getElementById("header_content_id")
-        .scrollIntoView({ behavior: "smooth" });
-  });
+    if (ReactDOM.findDOMNode(divEnd.current) && !loading) scrollToBottom();
+  }, [loading]);
 
   useEffect(() => {
     if (loading)
@@ -55,6 +54,13 @@ export default function Dashboard(props) {
         setLoading(false);
       }, 2000);
   }, [loading]);
+
+  // useEffect(() => {
+  //   if (document.getElementById("dashboard_main_bottom"))
+  //     document
+  //       .getElementById("dashboard_main_bottom")
+  //       .scrollIntoView({ behavior: "smooth" });
+  // }, []);
 
   // Check if necessary
   // useEffect(() => {
@@ -188,6 +194,7 @@ export default function Dashboard(props) {
       <>
         <h2>Fetching Dogs</h2>
         <LoadingDisplay loading={loading} />
+        <div ref={divEnd} />
       </>
     );
   else if (props.dogList.length === 0)
@@ -229,7 +236,9 @@ export default function Dashboard(props) {
           toggleAddDog={toggleAddDog}
         />
         <div className={"dashboard_dog_name_div"}>
-          <h5 className={"dashboard_dog_name"}>{dogName ? dogName : null}</h5>
+          <h5 className={"dashboard_dog_name"} ref={divEnd}>
+            {dogName ? dogName : null}
+          </h5>
         </div>
         {toggleAddDog ? (
           <AddDog
@@ -283,17 +292,21 @@ export default function Dashboard(props) {
           toggleDetailList={toggleDetailList}
           setToggleDetailList={setToggleDetailList}
         />
+        <div />
       </div>
     );
   else
     return (
-      <DogSelection
-        dogList={props.dogList}
-        setDogId={setDogId}
-        setRecord={setRecord}
-        setDogName={setDogName}
-        setDogBirthday={setDogBirthday}
-        setDogBreed={setDogBreed}
-      />
+      <>
+        <DogSelection
+          dogList={props.dogList}
+          setDogId={setDogId}
+          setRecord={setRecord}
+          setDogName={setDogName}
+          setDogBirthday={setDogBirthday}
+          setDogBreed={setDogBreed}
+        />
+        <div ref={divEnd} />
+      </>
     );
 }

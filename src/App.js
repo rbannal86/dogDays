@@ -5,7 +5,6 @@ import FSServices from "./Services/FSServices";
 import UserRegister from "./Components/UserRegister/UserRegister";
 import UserLogin from "./Components/UserLogin/UserLogin";
 import AddDog from "./Components/AddDog/AddDog";
-import ReactTooltip from "react-tooltip";
 
 import "./App.css";
 
@@ -43,6 +42,15 @@ function App() {
     }
   }, [dogList, userData]);
 
+  useEffect(() => {
+    if (!view && dogList && userData) {
+      console.log("scrolling");
+      document
+        .getElementById("app_bottom_anchor")
+        .scrollIntoView({ behavior: "smooth" });
+    }
+  }, [dogList, userData, view]);
+
   const handleLogOut = () => {
     setUserId(null);
     setUserData(null);
@@ -51,7 +59,6 @@ function App() {
 
   return (
     <div className="App">
-      <ReactTooltip event={"onHover"} />
       <Header setView={setView} userId={userId} handleLogOut={handleLogOut} />
       {view === "register" ? (
         <UserRegister setUserId={setUserId} setView={setView} />
@@ -75,6 +82,7 @@ function App() {
           setDogList={setDogList}
         />
       ) : null}
+      <div id={"app_bottom_anchor"}>BOTTOM</div>
     </div>
   );
 }

@@ -1,9 +1,18 @@
 .calendarnav_main {
-  position: fixed;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 80%;
 }
 
 .calendarnav_button {
+  font-size: 2rem;
   color: snow;
   background-color: inherit;
   border: none;
+  display: flex;
+  justify-content: center;
+  width: 20%;
+  padding: 0;
 }
