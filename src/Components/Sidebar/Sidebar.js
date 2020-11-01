@@ -39,6 +39,14 @@ export default function Sidebar(props) {
           className={"sidebar_button " + dayDetails}
           onClick={() => {
             handleDayDetails();
+            if (props.toggleAddDog) {
+              props.setToggleAddDog(!props.toggleAddDog);
+              handleAddNewDog();
+            }
+            if (props.toggleDogDetails) {
+              props.setToggleDogDetails(!props.toggleDogDetails);
+              handleDogDetails();
+            }
             props.setToggleDetails(!props.toggleDetails);
           }}
         >
@@ -50,6 +58,14 @@ export default function Sidebar(props) {
           className={"sidebar_button " + dogDetails}
           onClick={() => {
             handleDogDetails();
+            if (props.addNewDog) {
+              props.setToggleAddDog(!props.addNewDog);
+              handleAddNewDog();
+            }
+            if (props.toggleDetails) {
+              props.setToggleDetails(!props.toggleDetails);
+              handleDayDetails();
+            }
             props.setToggleDogDetails(!props.toggleDogDetails);
           }}
         >
@@ -73,6 +89,14 @@ export default function Sidebar(props) {
           className={"sidebar_button " + addNewDog}
           onClick={() => {
             handleAddNewDog();
+            if (props.toggleDetails) {
+              props.setToggleAddDog(!props.toggleDetails);
+              handleAddNewDog();
+            }
+            if (props.toggleDogDetails) {
+              props.setToggleDogDetails(!props.toggleDogDetails);
+              handleDogDetails();
+            }
             props.setToggleAddDog(!props.toggleAddDog);
           }}
         >
