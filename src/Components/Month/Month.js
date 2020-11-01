@@ -98,16 +98,30 @@ export default function Month(props) {
               }
             }
 
+            if (birthdayToggle === "birthday") aggregate = null;
+
             return (
               <li
                 className={
-                  "month_list_item " + birthdayToggle + " " + emptyToggle
+                  "month_list_item " +
+                  birthdayToggle +
+                  " " +
+                  emptyToggle +
+                  " " +
+                  props.view
                 }
                 key={index}
-                onClick={() => handleClick(day)}
+                onClick={() => {
+                  if (typeof day === "string") {
+                    return null;
+                  } else handleClick(day);
+                }}
               >
-                {birthdayToggle === "birthday" ? <CakeIcon /> : null}
-                <DayBox date={day} aggregate={aggregate} />
+                {birthdayToggle === "birthday" ? (
+                  <CakeIcon fontSize={"inherit"} />
+                ) : (
+                  <DayBox date={day} aggregate={aggregate} />
+                )}
               </li>
             );
           })}

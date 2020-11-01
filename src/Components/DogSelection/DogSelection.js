@@ -18,7 +18,9 @@ export default function DogSelection(props) {
                 props.setDogBreed(dog.dogBreed);
               }}
             >
-              {dog.dogName}
+              <button className={"dog_selection_list_button"}>
+                {dog.dogName}
+              </button>
             </li>
           );
         })}

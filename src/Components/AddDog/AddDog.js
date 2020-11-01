@@ -32,8 +32,8 @@ export default function AddDog(props) {
         newDogList.push(doc.data());
       });
     });
-
-    props.handleNewDog(dogId, newDogList);
+    if (props.handleNewDog) props.handleNewDog(dogId, newDogList);
+    else props.handleFirstDog(newDogList);
   };
 
   return (

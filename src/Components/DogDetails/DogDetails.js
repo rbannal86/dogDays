@@ -4,6 +4,7 @@ import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import EditIcon from "@material-ui/icons/Edit";
 import PublishIcon from "@material-ui/icons/Publish";
 import CancelIcon from "@material-ui/icons/Cancel";
+import Tooltip from "@material-ui/core/Tooltip";
 
 import "./DogDetails.css";
 
@@ -118,24 +119,33 @@ export default function DogDetails(props) {
         ) : null}
         {toggleConfirm ? null : (
           <div className={"dog_details_buttons"}>
-            <button
-              className={"dog_details_button"}
-              onClick={() => {
-                setToggleEdit(!toggleEdit);
-              }}
-            >
-              <EditIcon fontSize={"inherit"} />
-            </button>
-            <button
-              className={"dog_details_button"}
-              onClick={() => {
-                handleDelete();
-              }}
-            >
-              <DeleteForeverIcon fontSize={"inherit"} />
-            </button>
+            <Tooltip title={"Edit Dog Details"} placement={"top"}>
+              <button
+                className={"dog_details_button"}
+                onClick={() => {
+                  setToggleEdit(!toggleEdit);
+                }}
+              >
+                <EditIcon fontSize={"inherit"} />
+              </button>
+            </Tooltip>
+            <Tooltip title={"Delete Dog"} placement={"top"}>
+              <button
+                className={"dog_details_button"}
+                onClick={() => {
+                  handleDelete();
+                }}
+              >
+                <DeleteForeverIcon fontSize={"inherit"} />
+              </button>
+            </Tooltip>
           </div>
         )}
+        <Tooltip title={"Close Details"} placement={"top"}>
+          <button onClick={() => props.setToggleDogDetails(false)}>
+            Close
+          </button>
+        </Tooltip>
       </div>
     );
   else
@@ -183,18 +193,22 @@ export default function DogDetails(props) {
             />
           </div>
           <div className={"dog_details_buttons"}>
-            <button className={"dog_details_button"}>
-              <PublishIcon fontSize={"inherit"} />
-            </button>
-            <button
-              className={"dog_details_button"}
-              onClick={(e) => {
-                e.preventDefault();
-                setToggleEdit(!toggleEdit);
-              }}
-            >
-              <CancelIcon fontSize={"inherit"} />
-            </button>
+            <Tooltip title={"Save Changes"} placement={"top"}>
+              <button className={"dog_details_button"}>
+                <PublishIcon fontSize={"inherit"} />
+              </button>
+            </Tooltip>
+            <Tooltip title={"Discard Changes"} placement={"top"}>
+              <button
+                className={"dog_details_button"}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setToggleEdit(!toggleEdit);
+                }}
+              >
+                <CancelIcon fontSize={"inherit"} />
+              </button>
+            </Tooltip>
           </div>
         </form>
       </div>

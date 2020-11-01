@@ -5,9 +5,17 @@
 }
 
 .birthday {
-  background-color: #40dbf9;
-}
-
-#app_bottom_anchor {
-  display: none;
+  background-image: linear-gradient(
+    to right,
+    #4c0a44,
+    #522560,
+    #543c7b,
+    #515395,
+    #4a69ad,
+    #3f80c2,
+    #3297d4,
+    #29aee3,
+    #2cc5ef,
+    #40dbf9
+  );
 }

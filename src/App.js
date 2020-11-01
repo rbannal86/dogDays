@@ -9,7 +9,7 @@ import AddDog from "./Components/AddDog/AddDog";
 import "./App.css";
 
 function App() {
-  const [userId, setUserId] = useState("1DS5kpDKADXHoN8hHhucsFE6ikK2");
+  const [userId, setUserId] = useState(null);
   const [userData, setUserData] = useState(null);
   const [dogList, setDogList] = useState(null);
   const [view, setView] = useState(null);
@@ -42,19 +42,15 @@ function App() {
     }
   }, [dogList, userData]);
 
-  useEffect(() => {
-    if (!view && dogList && userData) {
-      console.log("scrolling");
-      document
-        .getElementById("app_bottom_anchor")
-        .scrollIntoView({ behavior: "smooth" });
-    }
-  }, [dogList, userData, view]);
-
   const handleLogOut = () => {
     setUserId(null);
     setUserData(null);
     setDogList(null);
+  };
+
+  const handleFirstDog = (newDogList) => {
+    setDogList(newDogList);
+    setView(null);
   };
 
   return (
@@ -72,6 +68,7 @@ function App() {
           setUserData={setUserData}
           setDogList={setDogList}
           setToggleAddDog={setView}
+          handleFirstDog={handleFirstDog}
         />
       ) : null}
       {userData && dogList && !view ? (
@@ -82,7 +79,6 @@ function App() {
           setDogList={setDogList}
         />
       ) : null}
-      <div id={"app_bottom_anchor"}>BOTTOM</div>
     </div>
   );
 }

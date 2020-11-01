@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import ReactDOM from "react-dom";
 import Calendar from "../Calendar/Calendar";
 import ViewButtons from "../ViewButtons/ViewButtons";
 import AddActivity from "../AddActivity/AddActivity";
@@ -37,6 +36,24 @@ export default function Dashboard(props) {
   const [dogBirthday, setDogBirthday] = useState(null);
 
   const [loading, setLoading] = useState(true);
+
+  //Handles scrolling entire dashboard into view
+  const handleScroll = () => {
+    if (
+      document.getElementById("dashboard_main_id") &&
+      !toggleDetailList &&
+      !toggleDogDetails &&
+      !toggleAddDog
+    ) {
+      document
+        .getElementById("dashboard_main_id")
+        .scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  setTimeout(() => {
+    handleScroll();
+  }, 200);
 
   useEffect(() => {
     if (loading)
@@ -97,10 +114,11 @@ export default function Dashboard(props) {
       setRecordKey(recordKey);
       setDay(day);
     } else {
+      setRecordKey(recordKey);
+      setDay(day);
       if (record[recordKey]) {
         if (record[recordKey][day]) {
           setDay(day);
-          setRecordKey(recordKey);
           setToggleDetailList(true);
           setDetails(record[recordKey][day].activities);
         } else {
@@ -204,6 +222,7 @@ export default function Dashboard(props) {
           setToggleAddDog={setToggleAddDog}
           toggleAddDog={toggleAddDog}
         />
+
         <div className={"dashboard_dog_name_div"}>
           <h5 className={"dashboard_dog_name"}>{dogName ? dogName : null}</h5>
         </div>
@@ -234,7 +253,6 @@ export default function Dashboard(props) {
             handleDeleteDog={handleDeleteDog}
           />
         ) : null}
-
         {toggleDetailList ? (
           <DetailList
             details={details}
@@ -259,7 +277,6 @@ export default function Dashboard(props) {
           toggleDetailList={toggleDetailList}
           setToggleDetailList={setToggleDetailList}
         />
-        <div />
       </div>
     );
   else

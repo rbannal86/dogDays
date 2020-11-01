@@ -20,6 +20,18 @@
   line-height: 1.5rem;
 }
 
+.dog_selection_list_button {
+  border: none;
+  background-color: inherit;
+  font-size: inherit;
+  color: inherit;
+  width: 60%;
+}
+
+.dog_selection_list_button:hover {
+  background-color: #4c0a44;
+}
+
 @media only screen and (min-width: 750px) {
   .dog_selection_title {
     font-size: 1.4rem;

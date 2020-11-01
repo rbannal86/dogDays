@@ -15,7 +15,8 @@ export default function Sidebar(props) {
 
   useEffect(() => {
     if (addNewDog && !props.toggleAddDog) setAddNewDog(false);
-  }, [addNewDog, props.toggleAddDog]);
+    if (dogDetails && !props.toggleDogDetails) setDogDetails(false);
+  }, [addNewDog, props.toggleAddDog, dogDetails, props.toggleDogDetails]);
 
   const handleDayDetails = () => {
     if (dayDetails === "") setDayDetails("open");

@@ -36,6 +36,7 @@ export default function Year(props) {
                 record={props.record}
                 birthMonth={props.birthMonth}
                 birthDay={props.birthDay}
+                view={"year"}
               />
             </li>
           );
