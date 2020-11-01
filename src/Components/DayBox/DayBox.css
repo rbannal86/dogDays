@@ -3,6 +3,10 @@
   width: inherit;
 }
 
+.label {
+  height: 20%;
+}
+
 .empty {
   background-color: inherit;
 }

@@ -5,6 +5,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import PublishIcon from "@material-ui/icons/Publish";
 import CancelIcon from "@material-ui/icons/Cancel";
 import Tooltip from "@material-ui/core/Tooltip";
+import CloseIcon from "@material-ui/icons/Close";
 
 import "./DogDetails.css";
 
@@ -141,11 +142,16 @@ export default function DogDetails(props) {
             </Tooltip>
           </div>
         )}
-        <Tooltip title={"Close Details"} placement={"top"}>
-          <button onClick={() => props.setToggleDogDetails(false)}>
-            Close
-          </button>
-        </Tooltip>
+        <div className={"dog_details_buttons"}>
+          <Tooltip title={"Close Details"} placement={"top"}>
+            <button
+              className={"dog_details_button"}
+              onClick={() => props.setToggleDogDetails(false)}
+            >
+              <CloseIcon fontSize={"inherit"} />
+            </button>
+          </Tooltip>
+        </div>
       </div>
     );
   else

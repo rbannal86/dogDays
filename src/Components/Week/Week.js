@@ -39,11 +39,14 @@ export default function Week(props) {
             };
           else clickFunc = props.handleAddActivity;
           let birthdayToggle = "";
-          if (
-            parseInt(props.month) + 1 === parseInt(props.birthMonth) &&
-            day === parseInt(props.birthDay)
-          )
-            birthdayToggle = "birthday";
+          if (recordKeyObject[day]) {
+            let dateMonth = parseInt(recordKeyObject[day].slice(0, 2));
+            if (
+              dateMonth === parseInt(props.birthMonth) &&
+              day === parseInt(props.birthDay)
+            )
+              birthdayToggle = "birthday";
+          }
           return (
             <li
               key={index}
