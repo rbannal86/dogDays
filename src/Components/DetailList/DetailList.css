@@ -5,9 +5,23 @@
   border-bottom: 2px snow solid;
 }
 
+.zero {
+  background-color: #4c0a44;
+}
+
+.five {
+  background-color: #3f80c2;
+}
+
+.ten {
+  background-color: #40dbf9;
+}
+
 .detail_list {
   list-style: none;
   padding-left: 0;
+  width: 80%;
+  margin: auto;
 }
 
 .detail_list_item {
@@ -18,6 +32,8 @@
   padding-left: 25%;
   padding-right: 25%;
   line-height: 2rem;
+  border: 2px #16161d solid;
+  margin-bottom: 2%;
 }
 
 .detail_list_item_button {

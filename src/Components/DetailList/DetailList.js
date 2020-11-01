@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 
 import "./DetailList.css";
+import { act } from "@testing-library/react";
 
 export default function DetailList(props) {
   const [formattedDate, setFormattedDate] = useState("");
@@ -22,9 +23,17 @@ export default function DetailList(props) {
       return (
         <ul className={"detail_list"}>
           {props.details.map((detail, index) => {
+            let activityLevel;
+            let activityValue = detail[Object.keys(detail)[0]];
+            if (activityValue === 10) activityLevel = "ten";
+            else if (activityValue === 5) activityLevel = "five";
+            else if (activityValue.toString() === "0") activityLevel = "zero";
             return (
-              <li key={"detail" + index} className={"detail_list_item"}>
-                {Object.keys(detail)}: {detail[Object.keys(detail)[0]]}
+              <li
+                key={"detail" + index}
+                className={"detail_list_item " + activityLevel}
+              >
+                {Object.keys(detail)}
                 <button
                   className={"detail_list_item_button"}
                   onClick={() => props.handleActivityDelete(index)}

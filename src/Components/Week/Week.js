@@ -32,6 +32,12 @@ export default function Week(props) {
     return (
       <ul className={"week_list"}>
         {weekArray.map((day, index) => {
+          let clickFunc;
+          if (typeof day === "string")
+            clickFunc = () => {
+              return null;
+            };
+          else clickFunc = props.handleAddActivity;
           let birthdayToggle = "";
           if (
             parseInt(props.month) + 1 === parseInt(props.birthMonth) &&
@@ -42,7 +48,7 @@ export default function Week(props) {
             <li
               key={index}
               className={"week_list_item " + birthdayToggle}
-              onClick={() => props.handleAddActivity(day, recordKeyObject[day])}
+              onClick={() => clickFunc(day, recordKeyObject[day])}
             >
               {birthdayToggle === "birthday" ? (
                 <CakeIcon />
