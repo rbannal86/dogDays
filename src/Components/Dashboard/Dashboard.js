@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import Calendar from "../Calendar/Calendar";
 import ViewButtons from "../ViewButtons/ViewButtons";
@@ -38,16 +38,6 @@ export default function Dashboard(props) {
 
   const [loading, setLoading] = useState(true);
 
-  const divEnd = useRef(null);
-
-  const scrollToBottom = () => {
-    ReactDOM.findDOMNode(divEnd.current).scrollIntoView();
-  };
-
-  useEffect(() => {
-    if (ReactDOM.findDOMNode(divEnd.current) && !loading) scrollToBottom();
-  }, [loading]);
-
   useEffect(() => {
     if (loading)
       setTimeout(() => {
@@ -55,40 +45,20 @@ export default function Dashboard(props) {
       }, 2000);
   }, [loading]);
 
-  // useEffect(() => {
-  //   if (document.getElementById("dashboard_main_bottom"))
-  //     document
-  //       .getElementById("dashboard_main_bottom")
-  //       .scrollIntoView({ behavior: "smooth" });
-  // }, []);
-
-  // Check if necessary
-  // useEffect(() => {
-  //   if (
-  //     !dogName &&
-  //     !dogBreed &&
-  //     !dogBirthday &&
-  //     !record &&
-  //     dogId &&
-  //     props.dogList.length > 0
-  //   ) {
-  //     console.log(props.dogList);
-  //     let dogSelected = props.dogList.filter((dog) => dog.id === dogId);
-  //     console.log();
-  //     setDogName(dogSelected[0].dogName);
-  //     setDogBreed(dogSelected[0].dogBreed);
-  //     setDogBirthday(dogSelected[0].dogBirthday);
-  //     setRecord(dogSelected[0].record);
-  //   }
-  // }, [dogBirthday, dogBreed, dogId, dogName, props.dogList, record]);
-
   useEffect(() => {
     if (detailsUpdated) setDetailsUpdated(false);
   }, [detailsUpdated]);
 
   useEffect(() => {
-    if (props.userData.dogs.length === 1) setDogId(props.userData.dogs[0]);
-  }, [props.userData.dogs]);
+    if (props.userData.dogs.length === 1) {
+      setDogId(props.userData.dogs[0]);
+      let dog = props.dogList[0];
+      setDogBirthday(dog.dogBirthday);
+      setDogBreed(dog.dogBreed);
+      setRecord(dog.record);
+      setDogName(dog.dogName);
+    }
+  }, [props.dogList, props.userData.dogs]);
 
   useEffect(() => {
     if (toggleDetailList && !toggleDetails) setToggleDetailList(false);
@@ -194,7 +164,6 @@ export default function Dashboard(props) {
       <>
         <h2>Fetching Dogs</h2>
         <LoadingDisplay loading={loading} />
-        <div ref={divEnd} />
       </>
     );
   else if (props.dogList.length === 0)
@@ -236,9 +205,7 @@ export default function Dashboard(props) {
           toggleAddDog={toggleAddDog}
         />
         <div className={"dashboard_dog_name_div"}>
-          <h5 className={"dashboard_dog_name"} ref={divEnd}>
-            {dogName ? dogName : null}
-          </h5>
+          <h5 className={"dashboard_dog_name"}>{dogName ? dogName : null}</h5>
         </div>
         {toggleAddDog ? (
           <AddDog
@@ -306,7 +273,6 @@ export default function Dashboard(props) {
           setDogBirthday={setDogBirthday}
           setDogBreed={setDogBreed}
         />
-        <div ref={divEnd} />
       </>
     );
 }

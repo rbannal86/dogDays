@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 
 import "./DetailList.css";
-import { act } from "@testing-library/react";
 
 export default function DetailList(props) {
   const [formattedDate, setFormattedDate] = useState("");

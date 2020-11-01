@@ -58,8 +58,8 @@ export default function Sidebar(props) {
           className={"sidebar_button " + dogDetails}
           onClick={() => {
             handleDogDetails();
-            if (props.addNewDog) {
-              props.setToggleAddDog(!props.addNewDog);
+            if (props.toggleAddDog) {
+              props.setToggleAddDog(!props.toggleAddDog);
               handleAddNewDog();
             }
             if (props.toggleDetails) {
@@ -79,6 +79,9 @@ export default function Sidebar(props) {
             props.setDogId(null);
             props.setRecord(null);
             props.setDogName(null);
+            props.setToggleAddDog(false);
+            props.setToggleDetails(false);
+            props.setToggleDogDetails(false);
           }}
         >
           <PetsIcon />
