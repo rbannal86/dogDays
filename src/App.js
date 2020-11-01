@@ -71,6 +71,14 @@ function App() {
           handleFirstDog={handleFirstDog}
         />
       ) : null}
+      {!userData ? (
+        <div className={"main_page_buttons"}>
+          <button onClick={() => setUserId("qf6wsu9crIflZ7f980XDzHxAxrz2")}>
+            Sample Account
+          </button>
+          <button>User Guide</button>
+        </div>
+      ) : null}
       {userData && dogList && !view ? (
         <Dashboard
           userData={userData}

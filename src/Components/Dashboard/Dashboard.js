@@ -16,7 +16,7 @@ import "./Dashboard.css";
 export default function Dashboard(props) {
   const [currentDate, setCurrentDate] = useState();
   const [selectedDate, setSelectedDate] = useState();
-  const [view, setView] = useState("week");
+  const [view, setView] = useState("year");
   const [openAddActivity, setOpenAddActivity] = useState(false);
   const [recordKey, setRecordKey] = useState(null);
   const [day, setDay] = useState(null);
@@ -40,13 +40,14 @@ export default function Dashboard(props) {
   //Handles scrolling entire dashboard into view
   const handleScroll = () => {
     if (
-      document.getElementById("dashboard_main_id") &&
+      document.getElementById("dashboard_bottom") &&
       !toggleDetailList &&
       !toggleDogDetails &&
-      !toggleAddDog
+      !toggleAddDog &&
+      !loading
     ) {
       document
-        .getElementById("dashboard_main_id")
+        .getElementById("dashboard_bottom")
         .scrollIntoView({ behavior: "smooth" });
     }
   };
@@ -177,7 +178,7 @@ export default function Dashboard(props) {
     FSServices.updateDogRecord(dogId, updatedStore);
   };
 
-  if (loading && !dogId && !dogName && !dogBreed && !dogBirthday)
+  if (loading)
     return (
       <>
         <h2>Fetching Dogs</h2>
@@ -203,7 +204,10 @@ export default function Dashboard(props) {
         <div className={"dashboard_information"}>
           <h4
             className={"dashboard_date"}
-            onClick={() => setSelectedDate(new Date())}
+            onClick={() => {
+              setSelectedDate(new Date());
+              setView("week");
+            }}
           >
             {currentDate ? currentDate : null}
           </h4>
@@ -264,6 +268,7 @@ export default function Dashboard(props) {
         {openAddActivity ? (
           <AddActivity handleAddActivitySubmit={handleAddActivitySubmit} />
         ) : null}
+        <div id={"dashboard_bottom"} />
         <ViewButtons view={view} setView={setView} />
         <Calendar
           view={view}
