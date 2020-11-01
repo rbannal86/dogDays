@@ -84,10 +84,16 @@ export default function Dashboard(props) {
   }, [openAddActivity, toggleDetailList, toggleDetails]);
 
   useEffect(() => {
-    let date = new Date();
-    setSelectedDate(date);
-    setCurrentDate(date.toLocaleDateString());
-  }, []);
+    if (props.userId !== "qf6wsu9crIflZ7f980XDzHxAxrz2") {
+      let date = new Date();
+      setSelectedDate(date);
+      setCurrentDate(date.toLocaleDateString());
+    } else {
+      let date = new Date(2020, 10, 1);
+      setSelectedDate(date);
+      setCurrentDate(date.toLocaleDateString());
+    }
+  }, [props.userId]);
 
   const handleNewDog = (dogId, dogList) => {
     let newDog = dogList.filter((dog) => dog.id === dogId)[0];

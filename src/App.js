@@ -81,6 +81,7 @@ function App() {
       ) : null}
       {userData && dogList && !view ? (
         <Dashboard
+          userId={userId}
           userData={userData}
           dogList={dogList}
           setUserData={setUserData}
