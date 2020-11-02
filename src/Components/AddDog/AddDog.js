@@ -27,13 +27,15 @@ export default function AddDog(props) {
     let dogId = data.dogId;
     props.setUserData(userObj);
     let newDogList = [];
-    await FSServices.fetchAllDogRecords(props.userId).then((res) => {
-      res.forEach((doc) => {
-        newDogList.push(doc.data());
+    await FSServices.fetchAllDogRecords(props.userId)
+      .then((res) => {
+        res.forEach((doc) => {
+          newDogList.push(doc.data());
+        });
+      })
+      .then(() => {
+        props.handleNewDog(dogId, newDogList);
       });
-    });
-    if (props.handleNewDog) props.handleNewDog(dogId, newDogList);
-    else props.handleFirstDog(newDogList);
   };
 
   return (

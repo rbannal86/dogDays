@@ -68,7 +68,8 @@ export default function Dashboard(props) {
   }, [detailsUpdated]);
 
   useEffect(() => {
-    if (props.userData.dogs.length === 1) {
+    if (props.userData.dogs.length === 1 && props.dogList[0]) {
+      console.log(props.dogList[0]);
       setDogId(props.userData.dogs[0]);
       let dog = props.dogList[0];
       setDogBirthday(dog.dogBirthday);
@@ -97,6 +98,7 @@ export default function Dashboard(props) {
 
   const handleNewDog = (dogId, dogList) => {
     let newDog = dogList.filter((dog) => dog.id === dogId)[0];
+    console.log(newDog);
     setDogId(dogId);
     props.setDogList(dogList);
     setDogName(newDog.dogName);

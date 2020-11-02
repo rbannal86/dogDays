@@ -31,7 +31,7 @@ export default function UserRegister(props) {
     let userId = await FSServices.registerNewUser(email, password, userName);
     console.log(userId);
     props.setUserId(userId.id);
-    props.setView("adddog");
+    props.setView(null);
   };
 
   const setInputState = (e) => {

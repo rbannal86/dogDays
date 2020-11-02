@@ -66,9 +66,14 @@ function App() {
     setDogList(null);
   };
 
+  const changeViewAfterFirstDog = () => {
+    // setView(null);
+  };
+
   const handleFirstDog = (newDogList) => {
+    console.log(newDogList);
     setDogList(newDogList);
-    setView(null);
+    changeViewAfterFirstDog();
   };
 
   return (
@@ -79,15 +84,6 @@ function App() {
       ) : null}
       {view === "login" ? (
         <UserLogin setView={setView} setUserId={setUserId} />
-      ) : null}
-      {view === "adddog" ? (
-        <AddDog
-          userId={userId}
-          setUserData={setUserData}
-          setDogList={setDogList}
-          setToggleAddDog={setView}
-          handleFirstDog={handleFirstDog}
-        />
       ) : null}
       {!userData ? (
         <div className={"main_page_buttons"}>
