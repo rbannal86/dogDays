@@ -14,7 +14,22 @@ function App() {
   const [dogList, setDogList] = useState(null);
   const [view, setView] = useState(null);
 
-  // replace useEffect with setData from login
+  const persistLogIn = () => {
+    if (localStorage.dogDaysId !== "" && !userId) {
+      setUserId(localStorage.dogDaysId);
+    }
+    if (
+      userId &&
+      userId !== "qf6wsu9crIflZ7f980XDzHxAxrz2" &&
+      !localStorage.dogDaysId
+    ) {
+      localStorage.setItem("dogDaysId", userId);
+    }
+  };
+  useEffect(() => {
+    persistLogIn();
+  });
+
   useEffect(() => {
     if (userId)
       FSServices.fetchUserRecords(userId).then((res) => {
@@ -23,26 +38,29 @@ function App() {
   }, [userId]);
 
   useEffect(() => {
-    const fetchAllDogRecords = async () => {
-      return await FSServices.fetchAllDogRecords(userData.id);
-    };
+    if (userId) {
+      const fetchAllDogRecords = async () => {
+        return await FSServices.fetchAllDogRecords(userData.id);
+      };
 
-    const updateDogList = async (data) => {
-      setDogList(data);
-    };
-    if (userData && !dogList) {
-      let newDogList = [];
-      fetchAllDogRecords()
-        .then((res) => {
-          res.forEach((doc) => {
-            newDogList.push(doc.data());
-          });
-        })
-        .then(() => updateDogList(newDogList));
+      const updateDogList = async (data) => {
+        setDogList(data);
+      };
+      if (userData && !dogList) {
+        let newDogList = [];
+        fetchAllDogRecords()
+          .then((res) => {
+            res.forEach((doc) => {
+              newDogList.push(doc.data());
+            });
+          })
+          .then(() => updateDogList(newDogList));
+      }
     }
-  }, [dogList, userData]);
+  }, [dogList, userData, userId]);
 
   const handleLogOut = () => {
+    window.localStorage.setItem("dogDaysId", "");
     setUserId(null);
     setUserData(null);
     setDogList(null);
