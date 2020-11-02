@@ -35,3 +35,5 @@ Live Site: https://dogdays.vercel.app/
 Front End: React.js, JavaScript, HTML, CSS
 
 Back End: Firebase
+
+### Created by Alex Bannow, 2020
