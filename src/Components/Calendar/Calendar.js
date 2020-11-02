@@ -16,15 +16,22 @@ export default function Calendar(props) {
   const [birthMonth, setBirthMonth] = useState(null);
   const [birthDay, setBirthDay] = useState(null);
 
+  //Takes the birthday date string and splits it into the day and month
+  //for easier use
   useEffect(() => {
     setBirthMonth(props.birthday.slice(5, 7));
     setBirthDay(props.birthday.slice(8));
   }, [props.birthday]);
 
+  //Trigger for when the records change. Makes sure to rerender with updated
+  //information.
   useEffect(() => {
     setRecord(props.record);
   }, [props.record]);
 
+  //Takes the selected date (either today's date or a date clicked on by user)
+  //and breaks down the date object to determine later which year/month/week to
+  //show. Also helps with comparing to birthday information
   useEffect(() => {
     if (props.selectedDate) {
       setYear(props.selectedDate.getFullYear());
@@ -35,11 +42,15 @@ export default function Calendar(props) {
     }
   }, [props.selectedDate]);
 
+  //Passed as prop to ViewButtons, sets the view to month in dashboard
   const handleYearClick = (month) => {
     props.setSelectedDate(new Date(year, month, 1));
     props.setView("month");
   };
 
+  //Passed as prop to ViewButtons, set the view to week in dashboard
+  //Checks if toggleDetails is true and, if it is, instead packages
+  //date information into a recordKey so the appropriate details are displayed
   const handleMonthClick = (day) => {
     props.setSelectedDate(new Date(year, month, day));
     if (!props.toggleDetails) props.setView("week");
@@ -51,6 +62,7 @@ export default function Calendar(props) {
     }
   };
 
+  //Passed as prop to CalendarNav, changes selectedDate to move calendar view
   const handleNavClick = (direction) => {
     if (direction === "back") {
       if (props.view === "year")
@@ -68,6 +80,8 @@ export default function Calendar(props) {
         props.setSelectedDate(new Date(year, month, date + 7));
     }
   };
+  //Conditional to make sure record exists (or everything will break). Fetching Data displays above loading component
+  //To avoid jarring jump when loading in data.
   if (record)
     return (
       <div className="calendar_main">

@@ -11,12 +11,14 @@ export default function ViewButtons(props) {
   const [monthView, setMonthView] = useState("");
   const [yearView, setYearView] = useState("");
 
+  //Highlights the currently selected button
   useEffect(() => {
     props.view === "week" ? setWeekView("active") : setWeekView("");
     props.view === "month" ? setMonthView("active") : setMonthView("");
     props.view === "year" ? setYearView("active") : setYearView("");
   }, [props.view]);
 
+  //Renders buttons and sets state in Dashboard based on which button is clicked
   return (
     <div className="viewbuttons_main">
       <Tooltip title={"Week"} placement={"top"}>

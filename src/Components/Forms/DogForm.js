@@ -1,6 +1,8 @@
 import React from "react";
 
 export default function DogForm(props) {
+  //Generic form prop currently only used in the UserLogin. Could be refactored
+  //to work for all forms throughout the app.
   return (
     <div>
       <label htmlFor={props.class}>{props.label}</label>

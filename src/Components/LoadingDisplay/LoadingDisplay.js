@@ -3,8 +3,10 @@ import React, { useEffect, useState } from "react";
 import "./LoadingDisplay.css";
 
 export default function LoadingDisplay() {
+  //Step changes and rerenders, determines which boxes are current colored
   const [step, setStep] = useState(0);
 
+  //Cycles through the boxes, cleans up when component unmounts
   useEffect(() => {
     let finished = false;
     const renderLoadingDisplay = () => {
@@ -20,6 +22,7 @@ export default function LoadingDisplay() {
     };
   });
 
+  //Based on step number, displays empty or colored box
   return (
     <div className={"loading_display_main"}>
       {step >= 0 ? (

@@ -9,6 +9,8 @@ export default function UserLogin(props) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
 
+  //Scrolls the view to show entire form and focuses on the
+  //first input.
   useEffect(() => {
     document.getElementById("login_email").focus();
     document
@@ -16,6 +18,9 @@ export default function UserLogin(props) {
       .scrollIntoView({ behavior: "smooth" });
   }, []);
 
+  //Checks if submitted email/password are valid, then
+  //fetches user records and updates App with that value.
+  //Sets the view to null to start showing Dashboard.
   const submitLogin = async (e) => {
     e.preventDefault();
     const login = await FSServices.signInUser(email, password);
@@ -27,6 +32,7 @@ export default function UserLogin(props) {
     }
   };
 
+  //Standard form with DogForm generic form component
   return (
     <div className={"user_login_main"} id={"user_login_main_id"}>
       <h2 className={"user_login_title"}>Log In</h2>

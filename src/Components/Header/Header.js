@@ -4,6 +4,8 @@ import HeaderDeco from "../HeaderDeco/HeaderDeco";
 import "./Header.css";
 
 export default function Header(props) {
+  //HeaderDeco shows color gradient. Has conditional buttons for log in, register
+  //log out
   return (
     <div className={"header_main"}>
       <HeaderDeco />

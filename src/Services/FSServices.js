@@ -2,6 +2,7 @@ import app from "./Base";
 const db = app.firestore();
 
 const FSServices = {
+  //Gets all date for one dog, based on dog Id
   async fetchDogRecords(dogId) {
     return await db
       .collection("dogs")
@@ -13,10 +14,12 @@ const FSServices = {
       });
   },
 
+  //Gets list of all dogs attached to user
   async fetchAllDogRecords(userId) {
     return await db.collection("dogs").where("userId", "==", userId).get();
   },
 
+  //Gets all user records based on userId
   async fetchUserRecords(userId) {
     return await db
       .collection("users")
@@ -28,6 +31,7 @@ const FSServices = {
       });
   },
 
+  //Updates dog record when record is added to or activity is deleted
   async updateDogRecord(dogId, record) {
     let dogObj = await db
       .collection("dogs")
@@ -42,6 +46,7 @@ const FSServices = {
     db.collection("dogs").doc(dogId).set(dogObj);
   },
 
+  //Updates dog details when the user changes name, etc.
   async updateDogDetails(dogId, name, breed, date) {
     let dogObj = await db
       .collection("dogs")
@@ -57,6 +62,8 @@ const FSServices = {
     db.collection("dogs").doc(dogId).set(dogObj);
   },
 
+  //Handles adding new dog. Creates new dog in dogs collection, then
+  //Adds dog id to user data
   async addDog(dogName, dogBreed, dogBirthday, userId) {
     let dogObj = {
       dogName,
@@ -82,6 +89,8 @@ const FSServices = {
     return { userObj, dogId: dogObj.id };
   },
 
+  //Deletes dog from dogs collection and removes id from dogs in
+  //user data.
   async deleteDog(dogId, userData) {
     await db.collection("dogs").doc(dogId).delete();
     let updatedUserData = userData;
@@ -90,6 +99,7 @@ const FSServices = {
     return updatedUserData;
   },
 
+  //Standard sign in
   async signInUser(email, password) {
     return await app
       .auth()
@@ -106,6 +116,7 @@ const FSServices = {
       });
   },
 
+  //Standard register
   async registerNewUser(email, password, displayName) {
     try {
       let user = await app

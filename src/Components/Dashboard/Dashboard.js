@@ -22,6 +22,7 @@ export default function Dashboard(props) {
   const [recordKey, setRecordKey] = useState(null);
   const [day, setDay] = useState(null);
 
+  //View Toggles
   const [toggleDetails, setToggleDetails] = useState(false);
   const [toggleDetailList, setToggleDetailList] = useState(false);
   const [details, setDetails] = useState(null);
@@ -29,7 +30,6 @@ export default function Dashboard(props) {
   const [toggleDogDetails, setToggleDogDetails] = useState(false);
   const [toggleAddDog, setToggleAddDog] = useState(false);
   const [toggleHelpPage, setToggleHelpPage] = useState(false);
-  const [deletingRecords, setDeletingRecords] = useState(false);
 
   //Dog Information State
   const [dogId, setDogId] = useState(null);
@@ -38,7 +38,10 @@ export default function Dashboard(props) {
   const [dogBreed, setDogBreed] = useState(null);
   const [dogBirthday, setDogBirthday] = useState(null);
 
+  //Loading/Deleting toggles to make transitions on loading dashboard and
+  //deleting records smoother
   const [loading, setLoading] = useState(true);
+  const [deletingRecords, setDeletingRecords] = useState(false);
 
   //Handles scrolling entire dashboard into view
   const handleScroll = () => {
@@ -59,6 +62,7 @@ export default function Dashboard(props) {
     handleScroll();
   }, 200);
 
+  //'Fake Loading' avoids jarring transition on log
   useEffect(() => {
     if (loading)
       setTimeout(() => {
@@ -66,10 +70,13 @@ export default function Dashboard(props) {
       }, 2000);
   }, [loading]);
 
+  //Trigger to make sure that everything rerenders when details are updated
   useEffect(() => {
     if (detailsUpdated) setDetailsUpdated(false);
   }, [detailsUpdated]);
 
+  //Makes sure that a user isn't directed to the dog selection component
+  //when there is only one dog for that user
   useEffect(() => {
     if (props.userData.dogs.length === 1 && props.dogList[0]) {
       setDogId(props.userData.dogs[0]);
@@ -79,13 +86,18 @@ export default function Dashboard(props) {
       setRecord(dog.record);
       setDogName(dog.dogName);
     }
-  }, [props.dogList, props.userData.dogs]);
+  }, [props.dogList, props.userData.dogs, deletingRecords]);
 
+  //Closes currently open forms or displays when a user selects a new one
   useEffect(() => {
     if (toggleDetailList && !toggleDetails) setToggleDetailList(false);
     if (toggleDetails && openAddActivity) setOpenAddActivity(false);
   }, [openAddActivity, toggleDetailList, toggleDetails]);
 
+  //Sets the selected date when a user logs in. If the user
+  //is using the sample account, sets the date to 11/1/2020,
+  //else sets the date to today's date. Sets current date
+  //based on selected date in a readable format
   useEffect(() => {
     if (props.userId !== "qf6wsu9crIflZ7f980XDzHxAxrz2") {
       let date = new Date();
@@ -98,6 +110,8 @@ export default function Dashboard(props) {
     }
   }, [props.userId]);
 
+  //Handles creating of a new dog by setting all of the dog info
+  //to the newly created dog info
   const handleNewDog = (dogId, dogList) => {
     let newDog = dogList.filter((dog) => dog.id === dogId)[0];
     setDogId(dogId);
@@ -109,6 +123,7 @@ export default function Dashboard(props) {
     setToggleAddDog(false);
   };
 
+  //Sets the loading transition after deleting dog records
   const deleteTransition = () => {
     setDeletingRecords(true);
     setTimeout(() => {
@@ -116,6 +131,8 @@ export default function Dashboard(props) {
     }, 5000);
   };
 
+  //Removes all dog information when deleting its records
+  //and begins the deleteTransition timeout
   const handleDeleteDog = (dogList) => {
     props.setDogList(dogList);
     setDogName(null);
@@ -126,6 +143,10 @@ export default function Dashboard(props) {
     deleteTransition();
   };
 
+  //Dual function - if the user has selected the day details mode,
+  //will open the day details display using the recordKey and day.
+  //Otherwise, it will open the add activity form and set the new
+  //data in the record using the recordKey and day.
   const handleAddActivity = (day, recordKey) => {
     if (!toggleDetails) {
       setOpenAddActivity(!openAddActivity);
@@ -147,6 +168,10 @@ export default function Dashboard(props) {
     }
   };
 
+  //Called when submitting a new activity. Closes the add activity form. Creates
+  //a new record by checking for the recordKey, then day, and either adds to the
+  //appropriate key or creates one. Changes the aggregate score. Updates the record
+  //in state, then updates the database.
   const handleAddActivitySubmit = (activity, value) => {
     setOpenAddActivity(false);
     let updatedStore = record;
@@ -175,6 +200,10 @@ export default function Dashboard(props) {
     FSServices.updateDogRecord(dogId, updatedStore);
   };
 
+  //Handles the deletion of an activity by removing the activity from the
+  //appropriate spot using recordKey and day, changes the aggregate score,
+  //then updates the record state and triggers the details updated, then
+  //updates the database.
   const handleActivityDelete = (index) => {
     let updatedStore = record;
     if (updatedStore[recordKey][day].activities.length === 1) {
@@ -194,6 +223,8 @@ export default function Dashboard(props) {
     setDetailsUpdated(true);
     FSServices.updateDogRecord(dogId, updatedStore);
   };
+
+  //Loads the Loading Display after deleting records
   if (deletingRecords)
     return (
       <>
@@ -201,6 +232,7 @@ export default function Dashboard(props) {
         <LoadingDisplay />
       </>
     );
+  //Loads the Loading Display when logging in or returning to the site
   else if (loading)
     return (
       <>
@@ -208,6 +240,7 @@ export default function Dashboard(props) {
         <LoadingDisplay />
       </>
     );
+  //Loads the add dog form when the user first registers or has no dogs
   else if (props.dogList.length === 0)
     return (
       <div className={"dashboard_main"}>
@@ -221,6 +254,8 @@ export default function Dashboard(props) {
         />
       </div>
     );
+  //Checks for all information required for the Calendar component, then loads the dashboard
+  //with conditional checks for various forms based on the user pressing buttons in the sidebar
   if (dogId && dogName && dogBreed && dogBirthday)
     return (
       <div className={"dashboard_main"} id={"dashboard_main_id"}>
@@ -315,6 +350,7 @@ export default function Dashboard(props) {
         )}
       </div>
     );
+  //Loads the DogSelection component when the user logs in and has more than one dog
   else
     return (
       <>

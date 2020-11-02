@@ -5,11 +5,15 @@ import CakeIcon from "@material-ui/icons/Cake";
 import "./Week.css";
 
 export default function Week(props) {
+  //Starts week array with day names, record array with null records, and recordKey object,
+  //and a week start for correctly building the array starting with a Sunday
   let weekArray = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   let recordArray = [null, null, null, null, null, null, null];
   let recordKeyObject = {};
   let weekStart = props.date - props.day;
 
+  //Fills in the weekArray with the correct numbers starting from the weekStart, grabs aggregate
+  //from record for proper display. Create entry in recordKeyObject for each day.
   for (let i = weekStart; i < weekStart + 7; i++) {
     let newDay = new Date(props.year, props.month, i);
     let recordKey = newDay.getMonth();
@@ -28,6 +32,8 @@ export default function Week(props) {
     weekArray.push(newDay.getDate());
   }
 
+  //Renders weekArray, starting with day names. Passes down aggregate score. Checks against
+  //Birthday and renders icon and adds class tag.
   const renderDays = () => {
     return (
       <ul className={"week_list"}>
@@ -65,6 +71,7 @@ export default function Week(props) {
     );
   };
 
+  //renders weekArray
   return (
     <div className={"week_main"}>
       <h3 className={"week_title"}>

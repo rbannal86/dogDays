@@ -10,10 +10,12 @@ export default function UserRegister(props) {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [userName, setUserName] = useState("");
 
+  //regex for password validation
   let passRegex = new RegExp(
     "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
   );
 
+  //Scrolls view to show entire form and focuses on first input.
   useEffect(() => {
     document.getElementById("user_email").focus();
     document
@@ -21,6 +23,8 @@ export default function UserRegister(props) {
       .scrollIntoView({ behavior: "smooth" });
   }, []);
 
+  //Checks passwords against regex, checks if passwords match, then creates new user.
+  //Returns the user id and sets state in App.
   const submitRegistration = async (e) => {
     e.preventDefault();
     if (!passRegex.test(password))
@@ -33,6 +37,7 @@ export default function UserRegister(props) {
     props.setView(null);
   };
 
+  //React controlled form method
   const setInputState = (e) => {
     if (error) setError("");
     switch (e.target.id) {
@@ -53,6 +58,7 @@ export default function UserRegister(props) {
     }
   };
 
+  //Standard form
   return (
     <div className={"user_register_main"} id={"user_register_main_id"}>
       <h2 className={"user_register_title"}>Register</h2>

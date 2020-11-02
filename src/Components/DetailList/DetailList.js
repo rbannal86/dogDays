@@ -4,8 +4,10 @@ import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import "./DetailList.css";
 
 export default function DetailList(props) {
+  //Readable date
   const [formattedDate, setFormattedDate] = useState("");
 
+  //Checks the recordKey and breaks it into the readable date for display
   useEffect(() => {
     if (props.recordKey) {
       let month = props.recordKey.slice(0, 2);
@@ -16,6 +18,9 @@ export default function DetailList(props) {
     }
   }, [props.day, props.recordKey]);
 
+  //Renders the activity list. If there are no activities for a day, displays Nothing Recorded.
+  //Checks activity 'level' and sets a class tag that determines background color. Activity
+  //Delete button calls function from dashboard that removes the activity from the record.
   const renderDetails = () => {
     if (props.details === "empty") return <div>Nothing Recorded</div>;
     else {

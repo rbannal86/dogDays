@@ -19,6 +19,7 @@ export default function DogDetails(props) {
   const [toggleConfirm, setToggleConfirm] = useState(false);
   const [deleted, setDeleted] = useState(false);
 
+  //Scrolls page so that entire form is visible upon loading and focuses on first input
   useEffect(() => {
     document
       .getElementById("dog_details_top")
@@ -27,6 +28,7 @@ export default function DogDetails(props) {
       document.getElementById("dog_details_name").focus();
   });
 
+  //Updates database with new details and updates information in Dashboard state
   const handleSubmit = () => {
     FSServices.updateDogDetails(
       props.dogId,
@@ -39,6 +41,7 @@ export default function DogDetails(props) {
     props.setDogBreed(dogBreed);
   };
 
+  //Checks current state of delete flow
   useEffect(() => {
     if (confirmDelete && !toggleConfirm) handleDelete();
   });
@@ -56,6 +59,9 @@ export default function DogDetails(props) {
     }
   }, [unformattedDate, toggleEdit]);
 
+  //Checks which stage of deleting records user is at. If at final stage, calls deleteDog from FSServices
+  //Then updates dogList and sends dogList back to Dashboar for processing. Otherwise, toggles confirmation
+  //screen.
   const handleDelete = async () => {
     if (confirmDelete) {
       if (!deleted) {
@@ -78,6 +84,8 @@ export default function DogDetails(props) {
     } else setToggleConfirm(true);
   };
 
+  //Checks if user is editing. If not, shows details. Has buttons for edit and delete.
+  //Displays delete confirmation if delete is pressed.
   if (!toggleEdit)
     return (
       <div className={"dog_details_main"} id={"dog_details_top"}>
@@ -154,6 +162,7 @@ export default function DogDetails(props) {
         </div>
       </div>
     );
+  //Edit details form.
   else
     return (
       <div className={"dog_details_main"} id={"dog_details_top"}>

@@ -4,6 +4,7 @@ import Month from "../Month/Month";
 import "./Year.css";
 
 export default function Year(props) {
+  //Sets month names for display
   let monthNames = [
     "January",
     "February",
@@ -19,6 +20,7 @@ export default function Year(props) {
     "December",
   ];
 
+  //Uses Month component to render each month for the year
   const renderMonths = () => {
     return (
       <ul className={"year_list"}>
@@ -45,6 +47,7 @@ export default function Year(props) {
     );
   };
 
+  //Shows entire year
   return (
     <>
       <h3>{props.year}</h3>

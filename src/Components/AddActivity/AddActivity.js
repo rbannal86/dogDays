@@ -10,6 +10,7 @@ export default function AddActivity(props) {
   const [value, setValue] = useState(null);
   const [activity, setActivity] = useState(null);
 
+  //Fires once the second part of the add activity prompt has been finished, submitting the information to FSServices
   useEffect(() => {
     const submitActivity = () => {
       props.handleAddActivitySubmit(activity, parseInt(value));
@@ -26,6 +27,7 @@ export default function AddActivity(props) {
     setStep("second");
   };
 
+  //Conditional rendering for two steps of the add activity form
   return (
     <div className={"add_activity_main"}>
       {step === "first" ? (

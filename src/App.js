@@ -14,6 +14,7 @@ function App() {
   const [dogList, setDogList] = useState(null);
   const [view, setView] = useState(null);
 
+  //Save the userId, unless the user is using the sample account
   const persistLogIn = () => {
     if (localStorage.dogDaysId !== "" && !userId) {
       setUserId(localStorage.dogDaysId);
@@ -30,6 +31,7 @@ function App() {
     persistLogIn();
   });
 
+  //Pulls the user information when a user either logs in or returns
   useEffect(() => {
     if (userId)
       FSServices.fetchUserRecords(userId).then((res) => {
@@ -37,6 +39,7 @@ function App() {
       });
   }, [userId]);
 
+  //Creates an array of all dog records when the user logs in or returns
   useEffect(() => {
     if (userId) {
       const fetchAllDogRecords = async () => {
@@ -59,6 +62,7 @@ function App() {
     }
   }, [dogList, userData, userId]);
 
+  //Removes all user data on log out, including local storage
   const handleLogOut = () => {
     window.localStorage.setItem("dogDaysId", "");
     setUserId(null);
@@ -66,6 +70,8 @@ function App() {
     setDogList(null);
   };
 
+  //Header determines view (register, login) and buttons for sample account and user guide point to either the sample dashboard
+  //or the user guide
   return (
     <div className="App">
       <Header setView={setView} userId={userId} handleLogOut={handleLogOut} />

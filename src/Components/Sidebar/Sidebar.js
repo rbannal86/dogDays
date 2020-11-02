@@ -15,11 +15,13 @@ export default function Sidebar(props) {
   const [addNewDog, setAddNewDog] = useState("");
   const [helpPage, setHelpPage] = useState("");
 
+  //Checks to make sure that buttons that shouldn't be active aren't
   useEffect(() => {
     if (addNewDog && !props.toggleAddDog) setAddNewDog(false);
     if (dogDetails && !props.toggleDogDetails) setDogDetails(false);
   }, [addNewDog, props.toggleAddDog, dogDetails, props.toggleDogDetails]);
 
+  //the following functions toggle between active and not for styling purposes.
   const handleHelp = () => {
     if (helpPage === "") setHelpPage("open");
     else setHelpPage("");
@@ -40,6 +42,8 @@ export default function Sidebar(props) {
     else setAddNewDog("");
   };
 
+  //Renders buttons with onClick for opening the appropriate view in the Dashboard
+  //and highlighting button or turning off the highlighting
   return (
     <div className={"sidebar_main"}>
       <Tooltip title={"Show Day Details"} placement={"top"}>

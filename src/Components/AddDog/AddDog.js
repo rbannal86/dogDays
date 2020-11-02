@@ -4,10 +4,13 @@ import FSServices from "../../Services/FSServices";
 import "./AddDog.css";
 
 export default function AddDog(props) {
+  //Form state
   const [dogName, setDogName] = useState("");
   const [dogBreed, setDogBreed] = useState("");
   const [dogBirthday, setDogBirthday] = useState("");
 
+  //Makes sure that the form is in the center of the screen and the first input
+  //is active when a user opens the form
   useEffect(() => {
     document.getElementById("add_dog_name").focus();
     document
@@ -15,6 +18,9 @@ export default function AddDog(props) {
       .scrollIntoView({ behavior: "smooth" });
   }, []);
 
+  //Bundles the data, then submits it to the Dashboard
+  //to load into state and change the active dog to the
+  //newly created dog
   const handleSubmit = async (e) => {
     e.preventDefault();
     let data = await FSServices.addDog(
@@ -38,6 +44,7 @@ export default function AddDog(props) {
       });
   };
 
+  //Standard form
   return (
     <div className={"add_dog_main"}>
       <h3 className={"add_dog_title"} id={"add_dog_top"}>

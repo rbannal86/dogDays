@@ -2,6 +2,7 @@ import React from "react";
 import "./HeaderDeco.css";
 
 export default function HeaderDeco() {
+  //Displays 10 equal-boxes in a chunky gradient
   return (
     <div className={"header_deco_main"}>
       <div className={"header_deco_segment"} id={"deco_1"}></div>

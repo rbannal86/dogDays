@@ -8,6 +8,7 @@ export default function Month(props) {
   const [days, setDays] = useState();
   const [recordKey, setRecordKey] = useState();
 
+  //Month names for display
   let monthNames = [
     "January",
     "February",
@@ -23,10 +24,12 @@ export default function Month(props) {
     "December",
   ];
 
+  //Starts month array with day names
   let monthArray = [];
   if (!props.monthName)
     monthArray = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
+  //Determines the number of days in the selected month.
   useEffect(() => {
     const makeDays = () => {
       if (monthNames[props.month] === "February") {
@@ -52,6 +55,7 @@ export default function Month(props) {
     makeDays();
   }, [monthNames, props.month, props.year]);
 
+  //Creates a record key based on the month and year props. Used to access correct data.
   useEffect(() => {
     let dateKey = props.month + 1;
     if (props.month + 1 < 10) dateKey = "0" + (props.month + 1);
@@ -59,6 +63,8 @@ export default function Month(props) {
     setRecordKey(dateKey);
   }, [props.month, props.year, recordKey]);
 
+  //Fills in month array. Adds empty 'boxes' to pad the start of the month, then
+  //adds days from 1 to end of the month.
   const generateMonthArray = () => {
     let startDay = new Date(props.year, props.month, 1).getDay();
     for (let i = 0; i < startDay; i++) monthArray.push(null);
@@ -68,10 +74,18 @@ export default function Month(props) {
     }
   };
 
+  //calls month array function
   generateMonthArray();
 
+  //creates handleClick function that determines the action taken when a date is clicked.
+  //If the user is in the day details mode, will open up details for the day. Determined
+  //by the existence of the handleMonthClick prop.
   let handleClick = () => {};
   if (props.handleMonthClick) handleClick = props.handleMonthClick;
+
+  //Renders the month array. Checks if each day is the dog's birthday and renders an icon.
+  //Gives each item the appropriate aggregate score for the DateBox to render the correct
+  //background color.
   const renderDays = () => {
     return (
       <>
@@ -130,6 +144,7 @@ export default function Month(props) {
     );
   };
 
+  //Returns month name and year and the display of the days in the month
   return (
     <>
       {props.view === "month" ? (

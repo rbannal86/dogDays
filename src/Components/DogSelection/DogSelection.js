@@ -3,6 +3,8 @@ import React from "react";
 import "./DogSelection.css";
 
 export default function DogSelection(props) {
+  //Shows a list of all of the dogs, rendered from dogList prop. Sets state
+  //in Dashboard when a dog is selected.
   const renderDogList = () => {
     return (
       <ul className={"dog_selection_list"}>
@@ -27,6 +29,7 @@ export default function DogSelection(props) {
       </ul>
     );
   };
+  //Checks if dogList exists. If not, show "Loading Dogs". Probably won't happen.
   if (props.dogList)
     return (
       <div className={"dog_selection_main"}>
