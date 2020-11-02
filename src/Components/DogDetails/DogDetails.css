@@ -29,13 +29,14 @@
 }
 
 .dog_details_button {
-  background-color: inherit;
-  border: none;
+  background-color: #4c0a44;
+  border: 2px snow solid;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 2rem;
-  color: #2cc5ef;
+  color: snow;
+  width: 100%;
 }
 
 .dog_details_form {
