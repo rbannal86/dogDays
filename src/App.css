@@ -19,3 +19,46 @@
     #40dbf9
   );
 }
+
+.main_page_buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 70%;
+  margin: auto;
+  margin-top: 10%;
+}
+
+.main_page_button {
+  background-color: #522560;
+  color: snow;
+  font-size: 0.9rem;
+  text-decoration: none;
+  border: 2px snow solid;
+  width: 40%;
+  padding: 5%;
+  margin-bottom: 10%;
+}
+
+.main_page_guide_button {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: auto;
+  margin-top: 10%;
+}
+
+@media only screen and (min-width: 750px) {
+  .main_page_button {
+    font-size: 1.8rem;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .main_page_button {
+    font-size: 3.5rem;
+  }
+}

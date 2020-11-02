@@ -175,6 +175,7 @@ export default function DogDetails(props) {
               onChange={(e) => {
                 setDogName(e.target.value);
               }}
+              required
             />
           </div>
           <h3 className={"dog_details_label"}>Breed</h3>
@@ -185,6 +186,7 @@ export default function DogDetails(props) {
               onChange={(e) => {
                 setDogBreed(e.target.value);
               }}
+              required
             />
           </div>
           <h3 className={"dog_details_label"}>Birthday</h3>
@@ -196,6 +198,7 @@ export default function DogDetails(props) {
               onChange={(e) => {
                 setUnformattedDate(e.target.value);
               }}
+              required
             />
           </div>
           <div className={"dog_details_buttons"}>

@@ -5,6 +5,7 @@ import DetailsIcon from "@material-ui/icons/Details";
 import PetsIcon from "@material-ui/icons/Pets";
 import EventNoteIcon from "@material-ui/icons/EventNote";
 import Tooltip from "@material-ui/core/Tooltip";
+import HelpIcon from "@material-ui/icons/Help";
 
 import "./Sidebar.css";
 
@@ -12,11 +13,17 @@ export default function Sidebar(props) {
   const [dayDetails, setDayDetails] = useState("");
   const [dogDetails, setDogDetails] = useState("");
   const [addNewDog, setAddNewDog] = useState("");
+  const [helpPage, setHelpPage] = useState("");
 
   useEffect(() => {
     if (addNewDog && !props.toggleAddDog) setAddNewDog(false);
     if (dogDetails && !props.toggleDogDetails) setDogDetails(false);
   }, [addNewDog, props.toggleAddDog, dogDetails, props.toggleDogDetails]);
+
+  const handleHelp = () => {
+    if (helpPage === "") setHelpPage("open");
+    else setHelpPage("");
+  };
 
   const handleDayDetails = () => {
     if (dayDetails === "") setDayDetails("open");
@@ -40,6 +47,10 @@ export default function Sidebar(props) {
           className={"sidebar_button " + dayDetails}
           onClick={() => {
             handleDayDetails();
+            if (props.toggleHelpPage) {
+              props.setToggleHelpPage(!props.toggleHelpPage);
+              handleHelp();
+            }
             if (props.toggleAddDog) {
               props.setToggleAddDog(!props.toggleAddDog);
               handleAddNewDog();
@@ -59,6 +70,10 @@ export default function Sidebar(props) {
           className={"sidebar_button " + dogDetails}
           onClick={() => {
             handleDogDetails();
+            if (props.toggleHelpPage) {
+              props.setToggleHelpPage(!props.toggleHelpPage);
+              handleHelp();
+            }
             if (props.toggleAddDog) {
               props.setToggleAddDog(!props.toggleAddDog);
               handleAddNewDog();
@@ -93,6 +108,10 @@ export default function Sidebar(props) {
           className={"sidebar_button " + addNewDog}
           onClick={() => {
             handleAddNewDog();
+            if (props.toggleHelpPage) {
+              props.setToggleHelpPage(!props.toggleHelpPage);
+              handleHelp();
+            }
             if (props.toggleDetails) {
               props.setToggleAddDog(!props.toggleDetails);
               handleAddNewDog();
@@ -105,6 +124,29 @@ export default function Sidebar(props) {
           }}
         >
           <PlaylistAddIcon />
+        </button>
+      </Tooltip>
+      <Tooltip title={"Open User Guide"} placement={"top"}>
+        <button
+          className={"sidebar_button " + helpPage}
+          onClick={() => {
+            handleHelp();
+            if (props.toggleDetails) {
+              props.setToggleAddDog(!props.toggleDetails);
+              handleAddNewDog();
+            }
+            if (props.toggleDogDetails) {
+              props.setToggleDogDetails(!props.toggleDogDetails);
+              handleDogDetails();
+            }
+            if (props.toggleAddDog) {
+              props.setToggleAddDog(!props.toggleAddDog);
+              handleAddNewDog();
+            }
+            props.setToggleHelpPage(!props.toggleHelpPage);
+          }}
+        >
+          <HelpIcon />
         </button>
       </Tooltip>
     </div>

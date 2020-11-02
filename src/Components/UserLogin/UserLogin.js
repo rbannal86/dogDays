@@ -55,7 +55,10 @@ export default function UserLogin(props) {
         <button className={"user_login_button"}>Log In</button>
         <button
           className={"user_login_button"}
-          onClick={() => props.setView(null)}
+          onClick={(e) => {
+            e.preventDefault();
+            props.setView(null);
+          }}
         >
           Cancel
         </button>

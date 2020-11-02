@@ -7,6 +7,7 @@ import DetailList from "../DetailList/DetailList";
 import DogDetails from "../DogDetails/DogDetails";
 import AddDog from "../AddDog/AddDog";
 import LoadingDisplay from "../LoadingDisplay/LoadingDisplay";
+import UserGuide from "../UserGuide/UserGuide";
 
 import FSServices from "../../Services/FSServices";
 import DogSelection from "../DogSelection/DogSelection";
@@ -27,6 +28,8 @@ export default function Dashboard(props) {
   const [detailsUpdated, setDetailsUpdated] = useState(false);
   const [toggleDogDetails, setToggleDogDetails] = useState(false);
   const [toggleAddDog, setToggleAddDog] = useState(false);
+  const [toggleHelpPage, setToggleHelpPage] = useState(false);
+  const [deletingRecords, setDeletingRecords] = useState(false);
 
   //Dog Information State
   const [dogId, setDogId] = useState(null);
@@ -69,7 +72,6 @@ export default function Dashboard(props) {
 
   useEffect(() => {
     if (props.userData.dogs.length === 1 && props.dogList[0]) {
-      console.log(props.dogList[0]);
       setDogId(props.userData.dogs[0]);
       let dog = props.dogList[0];
       setDogBirthday(dog.dogBirthday);
@@ -98,7 +100,6 @@ export default function Dashboard(props) {
 
   const handleNewDog = (dogId, dogList) => {
     let newDog = dogList.filter((dog) => dog.id === dogId)[0];
-    console.log(newDog);
     setDogId(dogId);
     props.setDogList(dogList);
     setDogName(newDog.dogName);
@@ -108,6 +109,13 @@ export default function Dashboard(props) {
     setToggleAddDog(false);
   };
 
+  const deleteTransition = () => {
+    setDeletingRecords(true);
+    setTimeout(() => {
+      setDeletingRecords(false);
+    }, 5000);
+  };
+
   const handleDeleteDog = (dogList) => {
     props.setDogList(dogList);
     setDogName(null);
@@ -115,6 +123,7 @@ export default function Dashboard(props) {
     setRecord(null);
     setDogBirthday(null);
     setDogId(null);
+    deleteTransition();
   };
 
   const handleAddActivity = (day, recordKey) => {
@@ -185,12 +194,18 @@ export default function Dashboard(props) {
     setDetailsUpdated(true);
     FSServices.updateDogRecord(dogId, updatedStore);
   };
-
-  if (loading)
+  if (deletingRecords)
+    return (
+      <>
+        <h2>Deleting Records</h2>
+        <LoadingDisplay />
+      </>
+    );
+  else if (loading)
     return (
       <>
         <h2>Fetching Dogs</h2>
-        <LoadingDisplay loading={loading} />
+        <LoadingDisplay />
       </>
     );
   else if (props.dogList.length === 0)
@@ -233,6 +248,8 @@ export default function Dashboard(props) {
           toggleDogDetails={toggleDogDetails}
           setToggleAddDog={setToggleAddDog}
           toggleAddDog={toggleAddDog}
+          setToggleHelpPage={setToggleHelpPage}
+          toggleHelpPage={toggleHelpPage}
         />
 
         <div className={"dashboard_dog_name_div"}>
@@ -277,19 +294,25 @@ export default function Dashboard(props) {
           <AddActivity handleAddActivitySubmit={handleAddActivitySubmit} />
         ) : null}
         <div id={"dashboard_bottom"} />
-        <ViewButtons view={view} setView={setView} />
-        <Calendar
-          view={view}
-          selectedDate={selectedDate}
-          setView={setView}
-          setSelectedDate={setSelectedDate}
-          handleAddActivity={handleAddActivity}
-          record={record}
-          birthday={dogBirthday}
-          toggleDetails={toggleDetails}
-          toggleDetailList={toggleDetailList}
-          setToggleDetailList={setToggleDetailList}
-        />
+        {toggleHelpPage ? (
+          <UserGuide />
+        ) : (
+          <>
+            <ViewButtons view={view} setView={setView} />
+            <Calendar
+              view={view}
+              selectedDate={selectedDate}
+              setView={setView}
+              setSelectedDate={setSelectedDate}
+              handleAddActivity={handleAddActivity}
+              record={record}
+              birthday={dogBirthday}
+              toggleDetails={toggleDetails}
+              toggleDetailList={toggleDetailList}
+              setToggleDetailList={setToggleDetailList}
+            />
+          </>
+        )}
       </div>
     );
   else

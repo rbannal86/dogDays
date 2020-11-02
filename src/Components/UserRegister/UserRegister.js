@@ -29,7 +29,6 @@ export default function UserRegister(props) {
       );
     if (password !== confirmPassword) return setError("Password don't match");
     let userId = await FSServices.registerNewUser(email, password, userName);
-    console.log(userId);
     props.setUserId(userId.id);
     props.setView(null);
   };
@@ -97,7 +96,10 @@ export default function UserRegister(props) {
         <button className={"user_register_button"}>Register</button>
         <button
           className={"user_register_button"}
-          onClick={() => props.setView(null)}
+          onClick={(e) => {
+            e.preventDefault();
+            props.setView(null);
+          }}
         >
           Cancel
         </button>

@@ -4,7 +4,7 @@ import Header from "./Components/Header/Header";
 import FSServices from "./Services/FSServices";
 import UserRegister from "./Components/UserRegister/UserRegister";
 import UserLogin from "./Components/UserLogin/UserLogin";
-import AddDog from "./Components/AddDog/AddDog";
+import UserGuide from "./Components/UserGuide/UserGuide";
 
 import "./App.css";
 
@@ -66,16 +66,6 @@ function App() {
     setDogList(null);
   };
 
-  const changeViewAfterFirstDog = () => {
-    // setView(null);
-  };
-
-  const handleFirstDog = (newDogList) => {
-    console.log(newDogList);
-    setDogList(newDogList);
-    changeViewAfterFirstDog();
-  };
-
   return (
     <div className="App">
       <Header setView={setView} userId={userId} handleLogOut={handleLogOut} />
@@ -85,12 +75,20 @@ function App() {
       {view === "login" ? (
         <UserLogin setView={setView} setUserId={setUserId} />
       ) : null}
-      {!userData ? (
+      {!userData && view === null ? (
         <div className={"main_page_buttons"}>
-          <button onClick={() => setUserId("qf6wsu9crIflZ7f980XDzHxAxrz2")}>
+          <button
+            className={"main_page_button"}
+            onClick={() => setUserId("qf6wsu9crIflZ7f980XDzHxAxrz2")}
+          >
             Sample Account
           </button>
-          <button>User Guide</button>
+          <button
+            className={"main_page_button"}
+            onClick={() => setView("userguide")}
+          >
+            User Guide
+          </button>
         </div>
       ) : null}
       {userData && dogList && !view ? (
@@ -101,6 +99,19 @@ function App() {
           setUserData={setUserData}
           setDogList={setDogList}
         />
+      ) : null}
+      {view === "userguide" ? (
+        <>
+          <UserGuide />
+          <div className={"main_page_guide_button"}>
+            <button
+              onClick={() => setView(null)}
+              className={"main_page_button"}
+            >
+              Back to Main Page
+            </button>
+          </div>
+        </>
       ) : null}
     </div>
   );

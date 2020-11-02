@@ -1,0 +1,38 @@
+.user_guide_main {
+  width: 80%;
+  margin: auto;
+}
+
+.user_guide_contents {
+  display: flex;
+  width: 80%;
+  flex-direction: column;
+  justify-content: left;
+  margin: auto;
+  border: 2px snow solid;
+  background-color: #4c0a44;
+}
+
+.user_guide_contents > ol {
+  text-align: left;
+}
+
+.user_guide_image {
+  width: 40%;
+  float: right;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.user_guide_copy {
+  text-align: left;
+  font-size: 0.9rem;
+  line-height: 1.2rem;
+  padding: 3%;
+  padding-top: 0;
+  margin-right: 3%;
+}
+
+.user_guide_section > img:nth-of-type(even) {
+  float: left;
+}
