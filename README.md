@@ -1,68 +1,37 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# dogDays
 
-## Available Scripts
+## Overview
 
-In the project directory, you can run:
+Borrowing inspiration from the mood tracking app trend, dogDays in a dog "mood" tracking app that aims to visualize the interactions
+between owner and dog through activities such as walking and training, while taking a simple gauge of how that activity went. Based on
+the aggregate scores of those activities for each day, a calendar view is then shown with different colors for each day based on that aggregate.
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Sample Account and User Guide
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+A comprehensive user guide with pictures goes over all of the features in the app. A sample account exists for anyone to take a look at all of the features dogDays provides.
 
-### `npm test`
+### Register and Log In
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Simple register and log in forms that utilize Firebase and its user authentication tools.
 
-### `npm run build`
+### Dashboard
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+A dashboard that displays all of the relevant data, from user name to today's date. A button bar allows a user to view details for the selected dog, edit those details, view activities for a selected day, add a new dog, select a new dog, and navigate to the user guide.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+### Calendar
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The calendar shows either a week, month, or year based on the user's selection. Any day with an activity logged will display a color based on the aggregate level of all activities. From darker to lighter, each view shows how things have been going with your dog.
 
-### `npm run eject`
+## Links
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+GitHub Repo: https://github.com/rbannal86/dogDays
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Live Site: https://dogdays.vercel.app/
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Technologies
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Front End: React.js, JavaScript, HTML, CSS
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Back End: Firebase
