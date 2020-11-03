@@ -22,8 +22,8 @@
 .add_dog_buttons {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  width: 60%;
+  justify-content: space-between;
+  width: 100%;
   margin: auto;
   margin-top: 3%;
 }
@@ -34,8 +34,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2rem;
+  font-size: 1.2rem;
   color: #2cc5ef;
+  width: 50%;
 }
 
 .add_dog_form {

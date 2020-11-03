@@ -28,12 +28,14 @@
   display: flex;
   font-size: 1.1rem;
   flex-direction: row;
-  justify-content: space-between;
-  padding-left: 25%;
-  padding-right: 25%;
+  justify-content: space-around;
+  padding-left: 10%;
+  padding-right: 0;
   line-height: 2rem;
   border: 2px #16161d solid;
+  margin: auto;
   margin-bottom: 2%;
+  width: 60%;
 }
 
 .detail_list_item_button {
@@ -60,8 +62,8 @@
 
   .detail_list_item {
     line-height: 4rem;
-    padding-right: 30%;
-    padding-left: 30%;
+    padding-right: 10%;
+    padding-left: 10%;
     font-size: 3rem;
   }
 
