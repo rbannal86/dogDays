@@ -6,6 +6,7 @@
   padding-top: 3%;
   padding-bottom: 3%;
   border-bottom: 2px snow solid;
+  width: 100%;
 }
 
 .add_activity_title {
@@ -16,7 +17,7 @@
 .add_activity_buttons {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-evenly;
   width: 100%;
 }
 
