@@ -19,6 +19,7 @@
   border: 1px snow solid;
   background-color: inherit;
   font-size: 0.7rem;
+  margin: -0.5px;
 }
 
 @media only screen and (min-width: 400px) {

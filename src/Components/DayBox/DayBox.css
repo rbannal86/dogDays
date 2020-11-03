@@ -1,6 +1,10 @@
 .daybox {
   height: inherit;
   width: inherit;
+  display: inline-block;
+  padding: 0;
+  padding-left: 0.5px;
+  padding-top: 0.5px;
 }
 
 .label {

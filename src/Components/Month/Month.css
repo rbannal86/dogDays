@@ -15,6 +15,12 @@
   height: 25px;
   border: 1px snow solid;
   font-size: 0.7rem;
+  margin: -0.5px;
+}
+
+.day_name {
+  border-bottom: 1px snow solid;
+  margin-bottom: 0px;
 }
 
 .year {
@@ -22,6 +28,7 @@
   height: 7px;
   font-size: 0rem;
   border: 1px snow solid;
+  margin: -0.5px;
 }
 
 .year > svg {

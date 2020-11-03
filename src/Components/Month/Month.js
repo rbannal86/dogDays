@@ -87,6 +87,7 @@ export default function Month(props) {
   //Gives each item the appropriate aggregate score for the DateBox to render the correct
   //background color.
   const renderDays = () => {
+    let i = 0;
     return (
       <>
         {!props.monthName ? null : (
@@ -94,6 +95,12 @@ export default function Month(props) {
         )}
         <ul className={"month_list"}>
           {monthArray.map((day, index) => {
+            let dayName = "";
+            if (i < 7 && props.view === "month") {
+              i++;
+              dayName = "day_name";
+            }
+
             let birthdayToggle = "";
             let emptyToggle = "";
             if (
@@ -122,7 +129,9 @@ export default function Month(props) {
                   " " +
                   emptyToggle +
                   " " +
-                  props.view
+                  props.view +
+                  " " +
+                  dayName
                 }
                 key={index}
                 onClick={() => {
