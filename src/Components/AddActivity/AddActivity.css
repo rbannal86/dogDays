@@ -1,12 +1,10 @@
 .add_activity_main {
   margin: auto;
   margin-top: 0;
-  background-color: rgb(108, 103, 109);
   background-color: snow;
   padding-top: 3%;
   padding-bottom: 3%;
   border-bottom: 2px snow solid;
-  width: 100%;
 }
 
 .add_activity_title {
@@ -17,8 +15,9 @@
 .add_activity_buttons {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-around;
   width: 100%;
+  padding: 0;
 }
 
 .add_activity_button {
@@ -28,6 +27,7 @@
   justify-content: center;
   background-color: inherit;
   font-size: 3rem;
+  padding: 0;
 }
 
 #add_activity_button_low {

@@ -1,7 +1,7 @@
 .header_content {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
   margin-left: 5%;
   margin-right: 5%;
   margin-top: 5%;
@@ -9,20 +9,20 @@
 
 .header_title {
   margin-top: 0;
-  font-size: 2.2rem;
+  font-size: 2rem;
   text-decoration: underline;
 }
 
 .header_button_div {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-around;
 }
 
 .header_button {
   background-color: #522560;
   color: snow;
-  font-size: 0.9rem;
+  font-size: 0.6rem;
   text-decoration: none;
   border: 2px snow solid;
   width: 120%;
